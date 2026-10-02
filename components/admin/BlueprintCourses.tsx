@@ -90,7 +90,7 @@ export function BlueprintCourses({ onSyncComplete }: BlueprintCoursesProps) {
             Materia Troncal Activa
           </span>
           <h4 className="text-sm font-bold text-white">
-            Economía I (ECO-101) — Cátedra Matriz Alpha Systems
+            Economía I (ECO-101) — Cátedra Matriz Aprender & Aprobar
           </h4>
           <p className="text-xs text-slate-400">
             Última modificación: 01 de Octubre, 2026 • 4 Módulos • 24 Flashcards • 1 Simulador

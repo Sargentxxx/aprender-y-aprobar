@@ -23,6 +23,8 @@ export interface University {
   logo: string;
   location: string;
   faculties: string[];
+  programs?: string[];
+  featuredSubjects?: string[];
 }
 
 export interface ResourceItem {

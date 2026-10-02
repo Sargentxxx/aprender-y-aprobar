@@ -5,18 +5,21 @@ import { MainNavbar } from "@/components/brand/Logo";
 import { Footer } from "@/components/brand/Footer";
 
 export const metadata: Metadata = {
-  title: "Aprender & Aprobar | Plataforma EdTech Universitaria • Alpha Systems",
+  title: "Aprender & Aprobar | Tu Plataforma Universitaria para Rendir y Aprobar",
   description:
-    "Ecosistema educativo de alto rendimiento para estudiantes de Ciencias Económicas y carreras universitarias (Siglo 21, UNSE, UCSE, UBP). Recuperación activa, repetición espaciada y streaming seguro.",
+    "Ecosistema educativo de alto rendimiento para estudiantes universitarios (Siglo 21, UNSE, UCSE, UBP, UNQ, UNSTA). Clases en video paso a paso, resúmenes oficiales, flashcards interactivas y simuladores de examen.",
   keywords: [
     "Economía 1",
     "Universidad Siglo 21",
     "UNSE",
+    "UCSE",
+    "UBP",
+    "UNQ",
+    "UNSTA",
     "Aprender y Aprobar",
-    "Alpha Systems",
     "Exámenes Universitarios",
-    "SpeedGrader",
     "Active Recall",
+    "Modelos de Parcial",
   ],
 };
 
