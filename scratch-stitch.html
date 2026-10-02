@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aprender &amp; Aprobar | Plataforma de Estudio para Universitarios Argentinos</title>
+<!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&amp;family=Plus Jakarta Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#2d3449",
+            "secondary-fixed": "#e9ddff",
+            "inverse-on-surface": "#283044",
+            "on-tertiary-fixed-variant": "#004e5c",
+            "tertiary-fixed-dim": "#4cd7f6",
+            "primary-fixed-dim": "#ffb0cd",
+            "inverse-primary": "#b4136d",
+            "tertiary-fixed": "#acedff",
+            "surface-container-high": "#222a3d",
+            "on-surface": "#dae2fd",
+            "surface-container-lowest": "#060e20",
+            "secondary-fixed-dim": "#d0bcff",
+            "surface-container": "#171f33",
+            "surface-bright": "#31394d",
+            "on-secondary-container": "#c4abff",
+            "background": "#0b1326",
+            "primary": "#ffb0cd",
+            "surface": "#0b1326",
+            "secondary-container": "#571bc1",
+            "on-background": "#dae2fd",
+            "tertiary-container": "#009eb9",
+            "secondary": "#d0bcff",
+            "surface-dim": "#0b1326",
+            "outline-variant": "#574048",
+            "on-primary-fixed-variant": "#8c0053",
+            "on-secondary": "#3c0091",
+            "surface-container-low": "#131b2e",
+            "on-primary-container": "#570032",
+            "on-tertiary": "#003640",
+            "on-secondary-fixed-variant": "#5516be",
+            "error-container": "#93000a",
+            "on-primary": "#640039",
+            "on-surface-variant": "#debec8",
+            "primary-container": "#f751a1",
+            "tertiary": "#4cd7f6",
+            "primary-fixed": "#ffd9e4",
+            "on-primary-fixed": "#3e0022",
+            "inverse-surface": "#dae2fd",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed": "#23005c",
+            "surface-container-highest": "#2d3449",
+            "outline": "#a68992",
+            "on-tertiary-fixed": "#001f26",
+            "on-error": "#690005",
+            "error": "#ffb4ab",
+            "on-tertiary-container": "#002f38",
+            "surface-tint": "#ffb0cd"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "1rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "margin": "2rem"
+          },
+          "fontFamily": {
+            "display-mobile": ["Outfit"],
+            "headline-lg": ["Outfit"],
+            "display": ["Outfit"],
+            "headline-lg-mobile": ["Outfit"],
+            "headline-sm": ["Outfit"],
+            "headline-md": ["Outfit"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "label-lg": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "800" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "title-md": ["18px", { "lineHeight": "26px", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Neon Glow & Tactile 3D Button Effects from Design System */
+    .tactile-btn-primary {
+      box-shadow: 0 4px 0 #be185d, 0 10px 20px -3px rgba(247, 81, 161, 0.4);
+      transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tactile-btn-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #be185d, 0 5px 10px -2px rgba(247, 81, 161, 0.3);
+    }
+
+    .tactile-btn-secondary {
+      box-shadow: 0 4px 0 #3c0091, 0 8px 16px -2px rgba(87, 27, 193, 0.35);
+      transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .tactile-btn-secondary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #3c0091, 0 3px 6px -1px rgba(87, 27, 193, 0.2);
+    }
+
+    .glow-magenta {
+      box-shadow: 0 0 32px -4px rgba(247, 81, 161, 0.35);
+    }
+
+    .glow-cyan {
+      box-shadow: 0 0 30px -4px rgba(76, 215, 246, 0.3);
+    }
+
+    /* Subtle Animated Ambient Gradients */
+    .bg-mesh-dark {
+      background-color: #0b1326;
+      background-image: 
+        radial-gradient(at 15% 15%, rgba(87, 27, 193, 0.28) 0px, transparent 55%),
+        radial-gradient(at 85% 20%, rgba(247, 81, 161, 0.22) 0px, transparent 50%),
+        radial-gradient(at 50% 80%, rgba(0, 158, 185, 0.2) 0px, transparent 60%);
+    }
+
+    .card-white-elevation {
+      box-shadow: 0 20px 40px -15px rgba(6, 14, 32, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md selection:bg-primary-container selection:text-white min-h-screen relative overflow-x-hidden bg-mesh-dark">
+<!-- ========================================== -->
+<!-- 1. HEADER / TOP NAVIGATION (Shared Component) -->
+<!-- ========================================== -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface/80 docked full-width top sticky z-50 border-b border-surface-variant/40 dark:border-surface-variant/40 shadow-sm dark:shadow-none transition-colors">
+<div class="w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Brand Logo & Monogram -->
+<a class="text-headline-sm font-headline-sm font-extrabold text-on-surface dark:text-on-surface tracking-tight flex items-center gap-3 group" href="#">
+<div class="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-secondary-container to-primary-container flex items-center justify-center p-0.5 shadow-md shadow-secondary-container/40 group-hover:scale-105 transition-transform duration-200">
+<div class="w-full h-full bg-surface-container-lowest rounded-[10px] flex items-center justify-center relative overflow-hidden">
+<span class="font-display text-primary font-black text-sm tracking-tighter">A&amp;A</span>
+<div class="absolute -bottom-1 -right-1 bg-tertiary text-surface-container-lowest rounded-full w-4 h-4 flex items-center justify-center">
+<span class="material-symbols-outlined text-[11px] font-bold" data-icon="check" data-weight="fill">check</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-white font-headline-sm font-extrabold leading-none tracking-tight">Aprender &amp; Aprobar</span>
+<span class="text-label-sm font-label-sm text-tertiary tracking-widest mt-0.5">UNIVERSIDADES ARGENTINAS</span>
+</div>
+</a>
+<!-- Desktop Navigation Links (Shared Component) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium transition-colors hover:text-on-surface text-label-lg font-label-lg" href="#materias">Materias</a>
+<a class="text-tertiary dark:text-tertiary font-bold border-b-2 border-tertiary pb-1 text-label-lg font-label-lg" href="#universidades">Universidades</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium transition-colors hover:text-on-surface text-label-lg font-label-lg" href="#portales">Portales</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium transition-colors hover:text-on-surface text-label-lg font-label-lg flex items-center gap-1.5" href="#simulacros">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+          Simulacros CBC
+        </a>
+</nav>
+<!-- Right Trailing Actions -->
+<div class="flex items-center gap-3">
+<!-- Student Streak Indicator Pill -->
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container border border-surface-variant/80 shadow-inner group cursor-pointer hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-primary-container text-[18px] group-hover:scale-110 transition-transform" data-icon="local_fire_department" data-weight="fill">local_fire_department</span>
+<span class="text-label-md font-label-md text-white font-bold">5 días</span>
+<span class="text-label-sm font-label-sm text-outline hidden sm:inline">de racha</span>
+</div>
+<!-- Google Login Action Button -->
+<button class="flex items-center gap-2 bg-surface-container-high hover:bg-surface-variant text-on-surface px-4 py-2 rounded-xl text-label-md font-label-md font-bold border border-surface-variant shadow-sm transition-all hover:border-tertiary/40 active:translate-y-0.5" type="button">
+<svg class="w-4 h-4 flex-shrink-0" viewbox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span class="hidden sm:inline">Iniciar Sesión con Google</span>
+<span class="sm:hidden">Ingresar</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- 2. HERO SECTION -->
+<!-- ========================================== -->
+<section class="relative pt-12 pb-20 md:pt-16 md:pb-28 px-6 max-w-7xl mx-auto overflow-hidden">
+<!-- Neon ambient highlights behind hero text -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-container/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/3 left-1/4 w-80 h-80 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/3 right-1/4 w-80 h-80 bg-tertiary-container/20 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="flex flex-col items-center text-center max-w-4xl mx-auto">
+<!-- Top Pills / Tag Ribbon -->
+<div class="flex flex-wrap items-center justify-center gap-2.5 mb-6">
+<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-surface-container-high border border-surface-variant text-tertiary text-label-md font-label-md shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="bolt" data-weight="fill">bolt</span>
+          Active Recall &amp; Repetición Espaciada
+        </span>
+<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-surface-container-high border border-surface-variant text-primary text-label-md font-label-md shadow-sm">
+<span>🇦🇷</span>
+          100% Adaptado a Universidades Argentinas
+        </span>
+<span class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-surface-container-high border border-surface-variant text-secondary-fixed text-label-md font-label-md shadow-sm">
+<span>🎯</span>
+          Simulacros CBC y Finales Reales
+        </span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-display font-display text-white font-black tracking-tight mb-6 leading-[1.1] sm:text-5xl md:text-6xl max-w-3xl">
+        ¿Listo para rendir y <span class="bg-gradient-to-r from-primary-container via-primary to-secondary bg-clip-text text-transparent">aprobar sin sufrir</span>?
+      </h1>
+<!-- Subtitle -->
+<p class="text-on-surface-variant text-body-lg font-body-lg max-w-2xl mb-10 leading-relaxed">
+        La plataforma de estudio inteligente con Active Recall, resúmenes al grano y simulacros reales de finales y parciales para universidades argentinas.
+      </p>
+<!-- Primary & Secondary CTA Buttons -->
+<div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-14">
+<!-- Tactile Primary CTA Button -->
+<a class="tactile-btn-primary w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-primary-container to-secondary-container text-white font-title-md text-title-md font-bold flex items-center justify-center gap-2.5 group" href="#simulador">
+<span>Empezar a Estudiar Gratis</span>
+<span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<!-- Glassmorphism Secondary Button -->
+<a class="w-full sm:w-auto px-7 py-4 rounded-xl bg-surface-container-high/70 hover:bg-surface-variant border border-surface-variant text-on-surface hover:text-white font-title-md text-title-md font-semibold backdrop-blur-md flex items-center justify-center gap-2 transition-all" href="#universidades">
+<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="travel_explore">travel_explore</span>
+<span>Explorar Simulacros</span>
+</a>
+</div>
+<!-- Social Proof / Trust Bar -->
+<div class="w-full max-w-xl p-4 rounded-2xl bg-surface-container-low/80 border border-surface-variant/60 backdrop-blur-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<!-- Student Avatar Stacks -->
+<div class="flex -space-x-3 overflow-hidden">
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-surface-container-highest flex items-center justify-center text-xs font-bold text-tertiary">SG</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-secondary-container flex items-center justify-center text-xs font-bold text-white">FB</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-primary-container flex items-center justify-center text-xs font-bold text-white">ML</div>
+<div class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-surface-bright flex items-center justify-center text-xs font-bold text-on-surface">+45k</div>
+</div>
+<div class="text-left">
+<p class="text-white text-label-md font-label-md font-extrabold leading-tight">Más de 45.000 parciales</p>
+<p class="text-on-surface-variant text-body-sm font-body-sm">aprobados en el último cuatrimestre</p>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-surface-container px-3.5 py-1.5 rounded-xl border border-surface-variant/40">
+<div class="flex text-amber-400">
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="star" data-weight="fill">star</span>
+</div>
+<span class="text-white font-bold text-label-md font-label-md">4.9/5</span>
+<span class="text-outline text-label-sm font-label-sm">(2.8k reviews)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 3. GAMIFIED ACTIVE RECALL & EXAM SIMULATION -->
+<!-- ========================================== -->
+<section class="py-12 px-6 max-w-7xl mx-auto" id="simulador">
+<!-- Section Title & Narrative Badge -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary/40 text-secondary text-label-md font-label-md mb-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="psychology" data-weight="fill">psychology</span>
+          Modo Examen Interactivo
+        </div>
+<h2 class="text-headline-lg font-headline-lg text-white font-black tracking-tight">
+          Entrená con simulacros reales, no de memoria
+        </h2>
+</div>
+<!-- Quick Metric Counter -->
+<div class="flex items-center gap-4">
+<div class="px-4 py-2 rounded-xl bg-surface-container-high border border-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]" data-icon="military_tech" data-weight="fill">military_tech</span>
+<div>
+<div class="text-label-sm font-label-sm text-outline">XP GANADOS</div>
+<div class="text-title-md font-title-md text-white font-bold">+120 XP</div>
+</div>
+</div>
+<div class="px-4 py-2 rounded-xl bg-surface-container-high border border-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="verified" data-weight="fill">verified</span>
+<div>
+<div class="text-label-sm font-label-sm text-outline">PRECISIÓN</div>
+<div class="text-title-md font-title-md text-white font-bold">92% Éxito</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Simulation HUD & Paper Card Container -->
+<div class="bg-surface-container-low rounded-3xl p-6 md:p-8 border border-surface-variant/80 shadow-2xl relative">
+<!-- Top HUD Header -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-surface-variant/50">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 rounded-lg bg-surface-container-highest text-tertiary text-label-md font-label-md font-bold tracking-wide">
+            DERECHO CONSTITUCIONAL ARGENTINO
+          </span>
+<span class="text-on-surface-variant text-label-md font-label-md font-semibold hidden sm:inline">
+            Cátedra Dr. Sabsay / Garat
+          </span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Countdown Timer Pill with Monospace Figures -->
+<div class="flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-surface-container-highest border border-surface-variant text-primary font-mono text-label-lg font-bold tracking-wider">
+<span class="material-symbols-outlined text-[18px] animate-spin" data-icon="timer">timer</span>
+<span>08:45</span>
+</div>
+<!-- Question Navigator Pill -->
+<span class="text-label-md font-label-md font-bold px-3 py-1 rounded-full bg-surface-container text-white border border-surface-variant">
+            Pregunta <span class="text-tertiary">4</span> de 12
+          </span>
+</div>
+</div>
+<!-- Segmented Multi-Color Progress Bar -->
+<div class="w-full h-2.5 bg-surface-container-highest rounded-full my-6 overflow-hidden p-0.5">
+<div class="h-full bg-gradient-to-r from-tertiary via-secondary to-primary-container rounded-full w-[33%] transition-all duration-500"></div>
+</div>
+<!-- THE FOCUS QUESTION PAPER CARD (Bright Crisp White Paper on Dark Canvas) -->
+<div class="bg-white rounded-2xl p-6 md:p-8 card-white-elevation text-surface-container-lowest border-2 border-primary-container/60 relative mb-8">
+<!-- Category & Concept Tag -->
+<div class="flex items-center justify-between mb-4">
+<span class="text-label-md font-label-md font-extrabold uppercase tracking-wider text-inverse-primary bg-primary-fixed/50 px-3 py-1 rounded-md">
+            Principio Constitucional Clave
+          </span>
+<span class="text-label-sm font-label-sm font-bold text-outline-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="help">help</span>
+            Dificultad: Parcial UBA / Siglo 21
+          </span>
+</div>
+<!-- Question Prompt -->
+<h3 class="text-headline-md font-headline-md text-surface-container-lowest font-black mb-6 leading-snug">
+          ¿Cuál es el principio fundamental de la jerarquía normativa según el Art. 31 de la Constitución Nacional Argentina?
+        </h3>
+<!-- Multiple Choice Options -->
+<div class="space-y-3" id="mc-options">
+<!-- Option 1: Incorrect -->
+<label class="flex items-start gap-4 p-4 rounded-xl border-2 border-surface-container-highest/20 hover:border-secondary hover:bg-slate-50 transition-all cursor-pointer group">
+<input class="mt-1 text-secondary focus:ring-secondary w-4 h-4" name="cn_question" type="radio"/>
+<div class="flex-1">
+<span class="font-bold text-slate-800 text-body-lg font-body-lg block">Las leyes provinciales tienen supremacía sobre las leyes del Congreso de la Nación cuando traten materias de salud y educación.</span>
+<span class="text-slate-500 text-body-sm font-body-sm">Incompatible con el federalismo centralizado del Art. 31.</span>
+</div>
+</label>
+<!-- Option 2: SELECTED / CORRECT STATE (Emerald Glow & Checkmark Highlight) -->
+<label class="flex items-start gap-4 p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50/70 shadow-sm transition-all cursor-pointer relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full pointer-events-none"></div>
+<input checked="" class="mt-1 text-emerald-600 focus:ring-emerald-500 w-4 h-4" name="cn_question" type="radio"/>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-extrabold text-slate-900 text-body-lg font-body-lg">
+                  La Constitución, las leyes de la Nación y los tratados con potencias extranjeras son la ley suprema de la Nación.
+                </span>
+<span class="material-symbols-outlined text-emerald-600 text-[20px] font-black" data-icon="check_circle" data-weight="fill">check_circle</span>
+</div>
+<span class="text-emerald-800 font-medium text-body-sm font-body-sm mt-1 block">
+                ¡Exacto! Doctrina de supremacía constitucional ratificada tras la Reforma de 1994 (Art. 75 inc. 22).
+              </span>
+</div>
+</label>
+<!-- Option 3: Standard Option -->
+<label class="flex items-start gap-4 p-4 rounded-xl border-2 border-surface-container-highest/20 hover:border-secondary hover:bg-slate-50 transition-all cursor-pointer group">
+<input class="mt-1 text-secondary focus:ring-secondary w-4 h-4" name="cn_question" type="radio"/>
+<div class="flex-1">
+<span class="font-bold text-slate-800 text-body-lg font-body-lg block">Los Decretos de Necesidad y Urgencia (DNU) poseen rango supra-constitucional en estados de excepción.</span>
+</div>
+</label>
+<!-- Option 4: Standard Option -->
+<label class="flex items-start gap-4 p-4 rounded-xl border-2 border-surface-container-highest/20 hover:border-secondary hover:bg-slate-50 transition-all cursor-pointer group">
+<input class="mt-1 text-secondary focus:ring-secondary w-4 h-4" name="cn_question" type="radio"/>
+<div class="flex-1">
+<span class="font-bold text-slate-800 text-body-lg font-body-lg block">Las ordenanzas municipales prevalecen sobre los tratados internacionales si no fueron homologadas por el Senado.</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Active Recall Spaced Repetition Rating HUD Bar -->
+<div class="p-5 rounded-2xl bg-surface-container-high border border-surface-variant flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3 text-center md:text-left">
+<span class="material-symbols-outlined text-tertiary text-[24px]" data-icon="schedule" data-weight="fill">schedule</span>
+<div>
+<div class="text-label-md font-label-md font-bold text-white">¿Qué tan fácil te resultó esta pregunta?</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">El algoritmo de repetición espaciada ajustará tu próxima fecha de repaso.</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 w-full md:w-auto">
+<!-- Hard -->
+<button class="px-4 py-2.5 rounded-xl bg-surface-container-lowest hover:bg-error-container/30 border border-error/30 text-on-surface font-label-md font-label-md flex flex-col items-center gap-0.5 active:scale-95 transition-all" type="button">
+<span class="text-base">😓 Difícil</span>
+<span class="text-[10px] text-outline">en 10 min</span>
+</button>
+<!-- Normal -->
+<button class="px-4 py-2.5 rounded-xl bg-surface-container-lowest hover:bg-tertiary-container/30 border border-tertiary/40 text-on-surface font-label-md font-label-md flex flex-col items-center gap-0.5 active:scale-95 transition-all" type="button">
+<span class="text-base">🤔 Normal</span>
+<span class="text-[10px] text-outline">en 1 día</span>
+</button>
+<!-- Easy -->
+<button class="px-4 py-2.5 rounded-xl bg-surface-container-lowest hover:bg-emerald-950/40 border border-emerald-500/40 text-on-surface font-label-md font-label-md flex flex-col items-center gap-0.5 active:scale-95 transition-all" type="button">
+<span class="text-base">🚀 Fácil</span>
+<span class="text-[10px] text-emerald-400 font-bold">en 4 días</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 4. INTERACTIVE UNIVERSITY SELECTOR -->
+<!-- ========================================== -->
+<section class="py-16 px-6 max-w-7xl mx-auto" id="universidades">
+<!-- Section Header -->
+<div class="text-center max-w-3xl mx-auto mb-14">
+<div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container border border-surface-variant text-tertiary text-label-md font-label-md mb-3">
+<span class="material-symbols-outlined text-[16px]" data-icon="school" data-weight="fill">school</span>
+        Elegí tu casa de estudios
+      </div>
+<h2 class="text-headline-lg font-headline-lg text-white font-black tracking-tight mb-3">
+        Contenido curado para tu plan de estudios y correlatividades
+      </h2>
+<p class="text-on-surface-variant text-body-md font-body-md">
+        Modelos de exámenes, resúmenes organizados por unidad y preguntas de cátedras reales verificadas por la comunidad.
+      </p>
+</div>
+<!-- 6 Distinct Rounded Crisp White Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Universidad Siglo 21 -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-primary-container">
+<div>
+<div class="flex items-start justify-between mb-4">
+<!-- Monogram Emblem -->
+<div class="w-14 h-14 rounded-2xl bg-[#004e5c] text-white flex items-center justify-center font-display font-black text-xl shadow-md">
+              S21
+            </div>
+<span class="bg-primary-container text-white px-3 py-1 rounded-full text-label-sm font-label-sm font-black uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[12px]" data-icon="local_fire_department" data-weight="fill">local_fire_department</span>
+              Popular
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            Universidad Siglo 21
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Modelos de SAM, finales virtuales EFIP I &amp; EFIP II, y parciales con banco de preguntas actualizado.
+          </p>
+<!-- Tags -->
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">SAM 1 y 2</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">EFIP Integrador</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+12.4k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            348 asignaturas
+          </span>
+<a class="text-primary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Card 2: UNSE (Univ. Nac. de Santiago del Estero) -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-secondary">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-[#1e293b] text-tertiary-fixed flex items-center justify-center font-display font-black text-xl shadow-md">
+              UNSE
+            </div>
+<span class="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-label-sm font-label-sm font-bold">
+              Nacional
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            UNSE
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Facultades de Ciencias Exactas y Tecnologías, Humanidades, Ciencias Médicas y Forestales.
+          </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Ingeniería</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Medicina</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+4.8k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            192 asignaturas
+          </span>
+<a class="text-secondary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Card 3: UCSE (Univ. Católica de Santiago del Estero) -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-tertiary">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-[#003640] text-tertiary flex items-center justify-center font-display font-black text-xl shadow-md">
+              UCSE
+            </div>
+<span class="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-label-sm font-label-sm font-bold">
+              Privada / Dpto.
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            UCSE
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Sedes Central, Rafaela, Jujuy y San Isidro. Planes de Abogacía, Ciencias Políticas y Contador Público.
+          </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Derecho</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Económicas</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+3.9k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            164 asignaturas
+          </span>
+<a class="text-tertiary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Card 4: UBP (Universidad Blas Pascal) -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-primary-container">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-[#570032] text-primary flex items-center justify-center font-display font-black text-xl shadow-md">
+              UBP
+            </div>
+<span class="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-label-sm font-label-sm font-bold">
+              Distancia &amp; Campus
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            Universidad Blas Pascal
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Carreras con modalidad online y presencial: Abogacía, Martillero Público, Gestión Ambiental y RRHH.
+          </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Abogacía</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Gestión</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+5.2k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            210 asignaturas
+          </span>
+<a class="text-primary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Card 5: UNQ (Univ. Nacional de Quilmes) -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-secondary">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-[#222a3d] text-tertiary-fixed-dim flex items-center justify-center font-display font-black text-xl shadow-md">
+              UNQ
+            </div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-label-sm font-label-sm font-bold">
+              UNQ Virtual
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            Univ. Nacional de Quilmes
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Plataforma adaptada para campus virtual UNQ y presencial: Biotecnología, Economía y Terapia Ocupacional.
+          </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Biotecnología</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Virtual</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+8.1k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            275 asignaturas
+          </span>
+<a class="text-secondary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Card 6: UNSTA (Univ. del Norte Santo Tomás de Aquino) -->
+<div class="bg-white rounded-3xl p-6 text-surface-container-lowest card-white-elevation relative flex flex-col justify-between group hover:-translate-y-1.5 transition-all duration-200 border-2 border-transparent hover:border-tertiary">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-14 h-14 rounded-2xl bg-[#004e5c] text-white flex items-center justify-center font-display font-black text-xl shadow-md">
+              UNSTA
+            </div>
+<span class="bg-slate-100 text-slate-800 px-3 py-1 rounded-full text-label-sm font-label-sm font-bold">
+              Tucumán &amp; NOA
+            </span>
+</div>
+<h3 class="text-title-md font-title-md font-extrabold text-slate-900 mb-1">
+            UNSTA
+          </h3>
+<p class="text-slate-600 text-body-sm font-body-sm mb-4">
+            Facultades de Ciencias de la Salud, Ingeniería, Filosofía y Ciencias Económicas y Empresariales.
+          </p>
+<div class="flex flex-wrap gap-1.5 mb-6">
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Salud</span>
+<span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-label-sm font-label-sm font-bold">Empresariales</span>
+<span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-800 text-label-sm font-label-sm font-bold">+3.5k alumnos</span>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+<span class="text-slate-500 text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-container" data-icon="menu_book">menu_book</span>
+            140 asignaturas
+          </span>
+<a class="text-tertiary-container font-label-md font-label-md font-extrabold flex items-center gap-1 group-hover:gap-2 transition-all" href="#">
+            Ver programas <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+<!-- More Universities CTA Banner -->
+<div class="mt-12 p-6 rounded-2xl bg-surface-container border border-surface-variant flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-2xl">🇦🇷</span>
+<div>
+<h4 class="text-white font-title-md font-title-md">¿No encontrás tu universidad o carrera?</h4>
+<p class="text-on-surface-variant text-body-sm font-body-sm">También tenemos contenido de UBA, UTN, UNC, UNLP y UNR organizado por comisiones.</p>
+</div>
+</div>
+<button class="whitespace-nowrap px-5 py-2.5 rounded-xl bg-surface-variant hover:bg-surface-bright text-tertiary font-label-md font-label-md font-bold transition-colors" type="button">
+        Solicitar mi programa
+      </button>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 5. QUICK FEATURE HIGHLIGHTS (Bento Grid) -->
+<!-- ========================================== -->
+<section class="py-16 px-6 max-w-7xl mx-auto border-t border-surface-variant/40">
+<div class="text-center max-w-2xl mx-auto mb-12">
+<h2 class="text-headline-lg font-headline-lg text-white font-bold tracking-tight mb-2">
+        Diseñado para estudiar un 70% más rápido
+      </h2>
+<p class="text-on-surface-variant text-body-md font-body-md">
+        Combinamos la gamificación adictiva de Duolingo con el orden y la precisión de Notion.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature 1 -->
+<div class="p-6 rounded-2xl bg-surface-container border border-surface-variant/60 flex flex-col justify-between hover:border-tertiary/50 transition-colors group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/30 border border-tertiary/40 flex items-center justify-center text-tertiary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" data-icon="auto_stories" data-weight="fill">auto_stories</span>
+</div>
+<h3 class="text-title-md font-title-md text-white font-bold mb-2">Resúmenes Colaborativos</h3>
+<p class="text-on-surface-variant text-body-sm font-body-sm leading-relaxed">
+            Sin hojas de relleno. Cada apunte está filtrado por alumnos que ya aprobaron con 8, 9 o 10 en tu misma cátedra.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-tertiary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+<span>Actualizado 2025</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="p-6 rounded-2xl bg-surface-container border border-surface-variant/60 flex flex-col justify-between hover:border-primary/50 transition-colors group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 border border-primary/40 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" data-icon="neurology" data-weight="fill">neurology</span>
+</div>
+<h3 class="text-title-md font-title-md text-white font-bold mb-2">Algoritmo Spaced Repetition</h3>
+<p class="text-on-surface-variant text-body-sm font-body-sm leading-relaxed">
+            El sistema detecta automáticamente qué conceptos te cuestan más y te los vuelve a preguntar antes de que los olvides.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-primary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+<span>Memoria a Largo Plazo</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="p-6 rounded-2xl bg-surface-container border border-surface-variant/60 flex flex-col justify-between hover:border-secondary/50 transition-colors group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-secondary-container/30 border border-secondary/40 flex items-center justify-center text-secondary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[24px]" data-icon="forum" data-weight="fill">forum</span>
+</div>
+<h3 class="text-title-md font-title-md text-white font-bold mb-2">Foros por Cátedra &amp; Discord</h3>
+<p class="text-on-surface-variant text-body-sm font-body-sm leading-relaxed">
+            Preguntá dudas puntuales de ejercicios o teóricos a compañeros que están rindiendo el mismo parcial esta semana.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-secondary text-label-sm font-label-sm font-bold uppercase tracking-wider">
+<span>Comunidad Activa 24/7</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="groups">groups</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 6. FOOTER (Shared Component) -->
+<!-- ========================================== -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-surface-variant/30 dark:border-surface-variant/30 docked full-width bottom mt-20">
+<div class="w-full max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Logo & Academic Mission in Argentina -->
+<div class="flex flex-col items-center md:items-start text-center md:text-left gap-2">
+<div class="text-title-md font-headline-sm font-bold text-on-surface dark:text-on-surface flex items-center gap-2">
+<span class="text-primary-container font-black">A&amp;A</span>
+<span>Aprender &amp; Aprobar</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline dark:text-outline max-w-md">
+          © 2025 Aprender &amp; Aprobar. Diseñado para universitarios en Argentina. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Footer Navigation Links (Exact from JSON) -->
+<div class="flex flex-wrap justify-center items-center gap-6 text-body-sm font-body-sm">
+<a class="text-outline dark:text-outline font-normal transition-colors hover:text-on-surface hover:text-tertiary-fixed-dim dark:hover:text-tertiary-fixed-dim" href="#">Términos y Condiciones</a>
+<a class="text-outline dark:text-outline font-normal transition-colors hover:text-on-surface hover:text-tertiary-fixed-dim dark:hover:text-tertiary-fixed-dim" href="#">Políticas de Privacidad</a>
+<a class="text-outline dark:text-outline font-normal transition-colors hover:text-on-surface hover:text-tertiary-fixed-dim dark:hover:text-tertiary-fixed-dim" href="#">Simulacros CBC/UBA</a>
+<a class="text-outline dark:text-outline font-normal transition-colors hover:text-on-surface hover:text-tertiary-fixed-dim dark:hover:text-tertiary-fixed-dim" href="#">Comunidad Discord</a>
+<a class="text-outline dark:text-outline font-normal transition-colors hover:text-on-surface hover:text-tertiary-fixed-dim dark:hover:text-tertiary-fixed-dim" href="#">Soporte</a>
+</div>
+</div>
+</footer>
+<!-- Light Vanilla Script for Interactive Preview Radio Mechanics -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const radioInputs = document.querySelectorAll('input[name="cn_question"]');
+      radioInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+          // Micro-reward tactile vibration feel if supported
+          if (navigator.vibrate) {
+            navigator.vibrate(30);
+          }
+        });
+      });
+    });
+  </script>
+</body></html>

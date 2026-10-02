@@ -58,7 +58,7 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col items-center overflow-x-hidden">
       {/* 1. HERO SECTION - Modern, Collegiate & Vibrant with Cinematic Background Image */}
-      <section className="relative w-full pt-12 pb-20 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 border-b border-pink-950/30 overflow-hidden">
+      <section className="relative w-full min-h-[660px] pt-14 pb-20 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 border-b border-pink-950/30 overflow-hidden flex flex-col justify-center items-center">
         {/* Background Image from Stitch */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
@@ -68,21 +68,19 @@ export default function HomePage() {
             priority
             className="object-cover object-center transform scale-105"
           />
-          {/* Layer 1: Multiplying Dark Slate Tint */}
-          <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
-          {/* Layer 2: Vignette Gradient & Directional Fade */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-slate-950" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,19,38,0.65)_0%,_rgba(2,6,23,0.95)_100%)]" />
+          {/* Subtle balanced gradient: visible students, clear atmospheric room */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/40 to-slate-950" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,19,38,0.45)_0%,_rgba(2,6,23,0.85)_100%)] pointer-events-none" />
         </div>
 
         {/* Ambient Vibrant Glows */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-pink-600/30 via-purple-600/25 to-cyan-500/20 blur-[140px] rounded-full pointer-events-none z-[1]" />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-8">
-          {/* Frosted Glassmorphism Card for Crystal-Clear Text Readability */}
-          <div className="backdrop-blur-xl bg-slate-950/70 sm:bg-slate-950/60 p-6 sm:p-10 md:p-14 rounded-[2.5rem] border border-white/15 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] space-y-6">
+        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-8 w-full">
+          {/* Central Soft Capsule for Ultra-Sharp Text Contrast without hiding the photo */}
+          <div className="max-w-4xl mx-auto text-center space-y-6 py-6 px-4 sm:px-8 rounded-3xl bg-slate-950/45 backdrop-blur-[2px] border border-white/10 shadow-2xl">
             {/* Student-centric Top Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 border border-pink-400/50 text-pink-200 text-xs sm:text-sm font-extrabold shadow-lg shadow-pink-500/20 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-950/80 border border-pink-400/60 text-pink-200 text-xs sm:text-sm font-extrabold shadow-lg shadow-pink-500/20 backdrop-blur-md">
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
@@ -90,16 +88,16 @@ export default function HomePage() {
               <span>🔥 +2.500 Estudiantes Aprobados en Argentina 🇦🇷</span>
             </div>
 
-            {/* Primary Headline with Deep Drop-Shadow */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+            {/* Primary Headline with Deep Shadow & Luminous Pink Glow */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,1)] [text-shadow:_0_4px_24px_rgba(0,0,0,0.95)]">
               Rendí y Aprobá en tu Universidad{" "}
-              <span className="bg-gradient-to-r from-pink-400 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">
+              <span className="text-[#f472b6] [text-shadow:_0_0_25px_rgba(244,114,182,0.85),_0_2px_4px_rgba(0,0,0,1)]">
                 sin Complicarte.
               </span>
             </h1>
 
             {/* Subtitle with High-Legibility Shield */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <p className="text-base sm:text-lg md:text-xl text-slate-100 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
               La plataforma pensada para estudiantes universitarios. Clases en video paso a paso, resúmenes oficiales de cátedra, flashcards con repetición espaciada y simuladores idénticos a los parciales de tu facultad.
             </p>
 
