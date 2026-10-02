@@ -57,97 +57,116 @@ export default function HomePage() {
 
   return (
     <div className="w-full flex flex-col items-center overflow-x-hidden">
-      {/* 1. HERO SECTION - Modern, Collegiate & Vibrant (No 'Nueva arquitectura' slogan) */}
-      <section className="relative w-full pt-12 pb-20 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 border-b border-pink-950/30 bg-gradient-to-b from-slate-950 via-[#100720] to-slate-950 overflow-hidden">
+      {/* 1. HERO SECTION - Modern, Collegiate & Vibrant with Cinematic Background Image */}
+      <section className="relative w-full pt-12 pb-20 md:pt-20 md:pb-28 px-4 sm:px-6 lg:px-8 border-b border-pink-950/30 overflow-hidden">
+        {/* Background Image from Stitch */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <Image
+            src="/images/hero-bg.jpg"
+            alt="Estudiantes universitarios preparando exámenes en equipo"
+            fill
+            priority
+            className="object-cover object-center transform scale-105"
+          />
+          {/* Layer 1: Multiplying Dark Slate Tint */}
+          <div className="absolute inset-0 bg-slate-950/75 mix-blend-multiply" />
+          {/* Layer 2: Vignette Gradient & Directional Fade */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/90 via-slate-950/60 to-slate-950" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(11,19,38,0.65)_0%,_rgba(2,6,23,0.95)_100%)]" />
+        </div>
+
         {/* Ambient Vibrant Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-pink-600/25 via-purple-600/20 to-cyan-500/15 blur-[140px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-pink-600/30 via-purple-600/25 to-cyan-500/20 blur-[140px] rounded-full pointer-events-none z-[1]" />
 
-        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-6">
-          {/* Student-centric Top Badge */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500/15 via-purple-500/15 to-indigo-500/15 border border-pink-500/40 text-pink-300 text-xs sm:text-sm font-extrabold shadow-lg shadow-pink-500/10 backdrop-blur-md">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
-            </span>
-            <span>🔥 +2.500 Estudiantes Aprobados en Argentina 🇦🇷</span>
-          </div>
+        <div className="max-w-5xl mx-auto text-center relative z-10 space-y-8">
+          {/* Frosted Glassmorphism Card for Crystal-Clear Text Readability */}
+          <div className="backdrop-blur-xl bg-slate-950/70 sm:bg-slate-950/60 p-6 sm:p-10 md:p-14 rounded-[2.5rem] border border-white/15 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] space-y-6">
+            {/* Student-centric Top Badge */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 border border-pink-400/50 text-pink-200 text-xs sm:text-sm font-extrabold shadow-lg shadow-pink-500/20 backdrop-blur-md">
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-pink-500"></span>
+              </span>
+              <span>🔥 +2.500 Estudiantes Aprobados en Argentina 🇦🇷</span>
+            </div>
 
-          {/* Primary Headline */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.12]">
-            Rendí y Aprobá en tu Universidad{" "}
-            <span className="bg-gradient-to-r from-pink-400 via-fuchsia-300 to-indigo-400 bg-clip-text text-transparent">
-              sin Complicarte.
-            </span>
-          </h1>
+            {/* Primary Headline with Deep Drop-Shadow */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.12] drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+              Rendí y Aprobá en tu Universidad{" "}
+              <span className="bg-gradient-to-r from-pink-400 via-fuchsia-300 to-indigo-300 bg-clip-text text-transparent">
+                sin Complicarte.
+              </span>
+            </h1>
 
-          {/* Subtitle */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
-            La plataforma pensada para estudiantes universitarios. Clases en video paso a paso, resúmenes oficiales de cátedra, flashcards con repetición espaciada y simuladores idénticos a los parciales de tu facultad.
-          </p>
+            {/* Subtitle with High-Legibility Shield */}
+            <p className="text-base sm:text-lg md:text-xl text-slate-200 max-w-3xl mx-auto leading-relaxed font-normal drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+              La plataforma pensada para estudiantes universitarios. Clases en video paso a paso, resúmenes oficiales de cátedra, flashcards con repetición espaciada y simuladores idénticos a los parciales de tu facultad.
+            </p>
 
-          {/* Main Call-to-Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
-            <a
-              href="#universidades"
-              className="px-7 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-black text-sm sm:text-base shadow-xl shadow-pink-500/25 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 active:translate-y-0"
-            >
-              <span>¿Cuál es tu Universidad?</span>
-              <ArrowRight className="w-5 h-5" />
-            </a>
-
-            {!firebaseUser && (
-              <button
-                type="button"
-                onClick={() => signInWithGoogle()}
-                className="px-6 py-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm sm:text-base shadow-xl shadow-white/10 flex items-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0"
+            {/* Main Call-to-Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4">
+              <a
+                href="#universidades"
+                className="px-7 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:to-indigo-700 text-white font-black text-sm sm:text-base shadow-xl shadow-pink-500/30 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 active:translate-y-0"
               >
-                {/* Official Google G Logo */}
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path
-                    fill="#4285F4"
-                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                  />
-                  <path
-                    fill="#34A853"
-                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                  />
-                  <path
-                    fill="#FBBC05"
-                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
-                  />
-                  <path
-                    fill="#EA4335"
-                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
-                  />
-                </svg>
-                <span>Acceder con Google</span>
-              </button>
-            )}
+                <span>¿Cuál es tu Universidad?</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
 
-            <Link
-              href="/materias/s21-economia-1"
-              className="px-6 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm sm:text-base border border-slate-700/80 flex items-center gap-2 transition-all"
-            >
-              <Play className="w-4 h-4 text-pink-400 fill-pink-400" />
-              <span>Ver Clase Gratis (Economía I)</span>
-            </Link>
+              {!firebaseUser && (
+                <button
+                  type="button"
+                  onClick={() => signInWithGoogle()}
+                  className="px-6 py-4 rounded-2xl bg-white hover:bg-slate-100 text-slate-900 font-extrabold text-sm sm:text-base shadow-xl shadow-white/20 flex items-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0"
+                >
+                  {/* Official Google G Logo */}
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                    />
+                  </svg>
+                  <span>Acceder con Google</span>
+                </button>
+              )}
+
+              <Link
+                href="/materias/s21-economia-1"
+                className="px-6 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white font-bold text-sm sm:text-base border border-slate-700/80 shadow-lg flex items-center gap-2 transition-all"
+              >
+                <Play className="w-4 h-4 text-pink-400 fill-pink-400" />
+                <span>Ver Clase Gratis (Economía I)</span>
+              </Link>
+            </div>
           </div>
 
-          {/* Quick Stats Grid */}
-          <div className="pt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+          {/* Quick Stats Grid with Frosted Glass */}
+          <div className="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 backdrop-blur-md shadow-lg">
               <div className="text-2xl sm:text-3xl font-black text-pink-400">98%</div>
               <div className="text-xs text-slate-300 font-semibold mt-1">Tasa de Aprobación</div>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 backdrop-blur-md shadow-lg">
               <div className="text-2xl sm:text-3xl font-black text-purple-400">6</div>
               <div className="text-xs text-slate-300 font-semibold mt-1">Universidades Oficiales</div>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 backdrop-blur-md shadow-lg">
               <div className="text-2xl sm:text-3xl font-black text-indigo-400">+1.200h</div>
               <div className="text-xs text-slate-300 font-semibold mt-1">Clases Grabadas HD</div>
             </div>
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-sm">
+            <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 backdrop-blur-md shadow-lg">
               <div className="text-2xl sm:text-3xl font-black text-emerald-400">100%</div>
               <div className="text-xs text-slate-300 font-semibold mt-1">Pago Seguro MercadoPago</div>
             </div>
