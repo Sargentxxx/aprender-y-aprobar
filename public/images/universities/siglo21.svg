@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="s21grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A896" />
+      <stop offset="50%" stop-color="#028090" />
+      <stop offset="100%" stop-color="#05668D" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.15" />
+    </filter>
+  </defs>
+  <!-- Icon Symbol: Siglo 21 4-point dynamic compass / spark -->
+  <g transform="translate(15, 12)" filter="url(#shadow)">
+    <circle cx="28" cy="28" r="26" fill="url(#s21grad)" />
+    <!-- Dynamic Star / Cross petals -->
+    <path d="M28 8 L32 24 L48 28 L32 32 L28 48 L24 32 L8 28 L24 24 Z" fill="#FFFFFF" />
+    <circle cx="28" cy="28" r="4" fill="#F0F3F4" />
+  </g>
+  <!-- Text Brand -->
+  <text x="82" y="36" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="21" fill="#0A2540" letter-spacing="-0.5">SIGLO 21</text>
+  <text x="82" y="52" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="9" fill="#00A896" letter-spacing="1.5">UNIVERSIDAD</text>
+</svg>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
+import { ThemeProvider } from "@/lib/theme-context";
 import { MainNavbar } from "@/components/brand/Logo";
 import { Footer } from "@/components/brand/Footer";
 
@@ -29,13 +30,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
-      <body className="min-h-screen flex flex-col bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-slate-950">
-        <AuthProvider>
-          <MainNavbar />
-          <main className="flex-1 w-full">{children}</main>
-          <Footer />
-        </AuthProvider>
+    <html lang="es" className="light" suppressHydrationWarning>
+      <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-pink-500 selection:text-white transition-colors duration-200">
+        <ThemeProvider>
+          <AuthProvider>
+            <MainNavbar />
+            <main className="flex-1 w-full">{children}</main>
+            <Footer />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

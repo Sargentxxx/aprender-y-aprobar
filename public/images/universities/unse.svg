@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="unsegrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F4C81" />
+      <stop offset="100%" stop-color="#002147" />
+    </linearGradient>
+    <filter id="shadow-unse" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.15" />
+    </filter>
+  </defs>
+  <!-- Seal / Emblem -->
+  <g transform="translate(15, 12)" filter="url(#shadow-unse)">
+    <circle cx="28" cy="28" r="26" fill="url(#unsegrad)" />
+    <!-- Sun of May / Argentine rays -->
+    <circle cx="28" cy="24" r="7" fill="#FDB813" />
+    <path d="M28 12 L28 15 M28 33 L28 36 M16 24 L19 24 M37 24 L40 24 M20 16 L22 18 M34 30 L36 32 M20 32 L22 30 M34 18 L36 16" stroke="#FDB813" stroke-width="2" stroke-linecap="round" />
+    <!-- Open Book -->
+    <path d="M19 40 C23 37, 26 38, 28 39 C30 38, 33 37, 37 40 L37 44 C33 41, 30 42, 28 43 C26 42, 23 41, 19 44 Z" fill="#FFFFFF" />
+  </g>
+  <!-- Text Brand -->
+  <text x="82" y="37" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="24" fill="#002147" letter-spacing="-0.5">UNSE</text>
+  <text x="82" y="52" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="8.5" fill="#D97706" letter-spacing="1">SANTIAGO DEL ESTERO</text>
+</svg>

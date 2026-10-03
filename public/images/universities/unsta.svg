@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="unstagrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+    <filter id="shadow-unsta" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.15" />
+    </filter>
+  </defs>
+  <!-- Dominican Cross Emblem -->
+  <g transform="translate(15, 12)" filter="url(#shadow-unsta)">
+    <circle cx="28" cy="28" r="26" fill="url(#unstagrad)" stroke="#EAB308" stroke-width="2" />
+    <!-- Cross Fleurée -->
+    <path d="M28 8 L32 16 L28 20 L24 16 Z M28 48 L32 40 L28 36 L24 40 Z M8 28 L16 24 L20 28 L16 32 Z M48 28 L40 24 L36 28 L40 32 Z M24 24 L32 24 L32 32 L24 32 Z" fill="#EAB308" />
+  </g>
+  <!-- Text Brand -->
+  <text x="82" y="37" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="24" fill="#0F172A" letter-spacing="-0.5">UNSTA</text>
+  <text x="82" y="52" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="8.5" fill="#CA8A04" letter-spacing="1">SANTO TOMÁS DE AQUINO</text>
+</svg>

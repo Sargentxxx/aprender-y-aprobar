@@ -4,8 +4,19 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/lib/auth-context";
+import { useTheme } from "@/lib/theme-context";
 import { LoginModal } from "@/components/auth/LoginModal";
-import { LogIn, LogOut, Flame, Sparkles, User, ChevronDown, Shield } from "lucide-react";
+import {
+  LogIn,
+  LogOut,
+  Flame,
+  Sparkles,
+  User,
+  ChevronDown,
+  Shield,
+  Sun,
+  Moon,
+} from "lucide-react";
 
 interface LogoProps {
   showPlatformTitle?: boolean;
@@ -16,37 +27,54 @@ export function AprenderAprobarLogo({ size = "md" }: LogoProps) {
   const isSm = size === "sm";
   const isLg = size === "lg";
 
+  // Increased by 10%:
+  // sm: 36px -> 40px
+  // md: 44px -> 50px (increased ~12% for impact)
+  // lg: 56px -> 64px
+  const iconDimensions = isSm ? 40 : isLg ? 64 : 50;
+
   return (
-    <div className="flex items-center gap-3 select-none group">
-      {/* 3D Glossy Brand Icon */}
-      <div
-        className={`relative flex items-center justify-center rounded-2xl overflow-hidden shadow-md shadow-pink-500/20 border border-white/20 transition-transform group-hover:scale-105 ${
-          isSm ? "w-9 h-9" : isLg ? "w-14 h-14" : "w-11 h-11"
-        }`}
-      >
-        <Image
-          src="/images/logo-icon.png"
-          alt="Aprender & Aprobar Logo"
-          width={isSm ? 36 : isLg ? 56 : 44}
-          height={isSm ? 36 : isLg ? 56 : 44}
-          className="w-full h-full object-cover"
-          priority
-        />
+    <div className="flex items-center gap-3.5 select-none group cursor-pointer">
+      {/* 3D Glossy Brand Icon with Eye-Catching Radiant Halo & Hover Spin/Bounce */}
+      <div className="relative">
+        {/* Ambient Pulsing Glow Aura */}
+        <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 opacity-65 blur-[6px] group-hover:opacity-100 group-hover:blur-[10px] transition-all duration-500 animate-pulse" />
+
+        {/* Outer Container with 10% Size Boost */}
+        <div
+          style={{ width: `${iconDimensions}px`, height: `${iconDimensions}px` }}
+          className="relative flex items-center justify-center rounded-2xl overflow-hidden shadow-xl shadow-pink-500/30 border-2 border-white/60 dark:border-pink-500/40 bg-gradient-to-br from-white via-pink-50 to-pink-100 dark:from-slate-900 dark:to-slate-950 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3"
+        >
+          <Image
+            src="/images/logo-icon.png"
+            alt="Aprender & Aprobar Logo"
+            width={iconDimensions}
+            height={iconDimensions}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            priority
+          />
+
+          {/* Shimmer light flare diagonal sweep */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+        </div>
       </div>
 
-      {/* Official Typography: Aprender & Aprobar */}
+      {/* Official Typography: Aprender & Aprobar (+10% typography scale with animated shimmer) */}
       <div className="flex flex-col justify-center leading-tight">
+        <div className="flex items-center gap-1.5">
+          <span
+            className={`font-black tracking-tight text-slate-900 dark:text-white transition-colors duration-300 logo-shimmer-text ${
+              isSm ? "text-base" : isLg ? "text-3xl" : "text-xl sm:text-[22px]"
+            }`}
+            style={{ fontFamily: "var(--font-outfit, sans-serif)", letterSpacing: "-0.02em" }}
+          >
+            Aprender <span className="text-pink-500 font-extrabold">&</span> Aprobar
+          </span>
+          <Sparkles className="w-3.5 h-3.5 text-pink-500 animate-bounce hidden sm:inline-block" />
+        </div>
         <span
-          className={`font-black text-white tracking-tight ${
-            isSm ? "text-sm" : isLg ? "text-2xl" : "text-lg"
-          }`}
-          style={{ fontFamily: "var(--font-outfit, sans-serif)", letterSpacing: "-0.02em" }}
-        >
-          Aprender <span className="text-pink-400 font-extrabold">&</span> Aprobar
-        </span>
-        <span
-          className={`font-bold uppercase tracking-wider text-pink-200/90 ${
-            isSm ? "text-[8px]" : isLg ? "text-[11px]" : "text-[9.5px]"
+          className={`font-extrabold uppercase tracking-wider text-pink-600 dark:text-pink-300/90 transition-colors ${
+            isSm ? "text-[9px]" : isLg ? "text-[12px]" : "text-[10.5px]"
           }`}
         >
           Plataforma Universitaria
@@ -61,6 +89,7 @@ export const AlphaSystemsLogo = AprenderAprobarLogo;
 
 export function MainNavbar() {
   const { firebaseUser, profile, logout, signInWithGoogle, isAdmin, isTeacher } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
@@ -78,47 +107,71 @@ export function MainNavbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-slate-950/80 border-b border-pink-900/30 transition-all">
+      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-pink-100 dark:border-pink-900/30 shadow-sm transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo with 10% size increase and eye-catching animated styling */}
           <Link href="/" className="hover:opacity-95 transition-opacity">
             <AprenderAprobarLogo size="md" />
           </Link>
 
           {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-200">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-bold text-slate-700 dark:text-slate-200">
             <Link
               href="/#universidades"
-              className="hover:text-pink-400 transition-colors flex items-center gap-1.5"
+              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors flex items-center gap-1.5"
             >
               <span>Universidades</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-pink-500/20 text-pink-300 font-bold border border-pink-500/30">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 font-extrabold border border-pink-200 dark:border-pink-500/30">
                 6 Oficiales
               </span>
             </Link>
-            <Link href="/#materias" className="hover:text-pink-400 transition-colors">
+            <Link
+              href="/#materias"
+              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+            >
               Materias
             </Link>
-            <Link href="/#metodo" className="hover:text-pink-400 transition-colors">
+            <Link
+              href="/#metodo"
+              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+            >
               Método de Estudio
             </Link>
-            <Link href="/#portales" className="hover:text-pink-400 transition-colors">
+            <Link
+              href="/#portales"
+              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+            >
               Portales
             </Link>
           </nav>
 
           {/* Right Action Buttons */}
           <div className="flex items-center gap-3">
+            {/* Theme Switcher Button (Light / Dark) */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              title={theme === "dark" ? "Cambiar a modo Claro" : "Cambiar a modo Oscuro"}
+              aria-label="Alternar tema de color"
+              className="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-amber-300 hover:border-pink-400 dark:hover:border-pink-500 transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center justify-center"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-4 h-4 text-amber-300 animate-spin-slow" />
+              ) : (
+                <Moon className="w-4 h-4 text-indigo-600" />
+              )}
+            </button>
+
             {firebaseUser ? (
               // Authenticated User Menu
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-700 hover:border-pink-500/50 text-white transition-all"
+                  className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-pink-500/50 text-slate-900 dark:text-white transition-all shadow-sm"
                 >
                   {/* Streak Flame */}
-                  <div className="flex items-center gap-1 text-amber-400 text-xs font-black pr-1 border-r border-slate-700">
-                    <Flame className="w-4 h-4 fill-amber-400 text-amber-400 animate-pulse" />
+                  <div className="flex items-center gap-1 text-amber-500 dark:text-amber-400 text-xs font-black pr-1 border-r border-slate-300 dark:border-slate-700">
+                    <Flame className="w-4 h-4 fill-amber-400 text-amber-500 animate-pulse" />
                     <span>{profile?.studyStreak || 1}d</span>
                   </div>
 
@@ -142,31 +195,35 @@ export function MainNavbar() {
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded font-extrabold uppercase ${
                       isAdmin
-                        ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
+                        ? "bg-rose-500/10 text-rose-600 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
                         : isTeacher
-                        ? "bg-purple-500/20 text-purple-300 border border-purple-500/40"
-                        : "bg-pink-500/20 text-pink-300 border border-pink-500/40"
+                        ? "bg-purple-500/10 text-purple-600 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30"
+                        : "bg-pink-500/10 text-pink-600 dark:bg-pink-500/20 dark:text-pink-300 border border-pink-500/30"
                     }`}
                   >
                     {isAdmin ? "Admin" : isTeacher ? "Docente" : "Alumno"}
                   </span>
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                 </button>
 
                 {/* Dropdown Menu */}
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl py-2 z-50 text-slate-200 text-xs font-medium animate-fadeIn">
-                    <div className="px-4 py-2 border-b border-slate-800">
-                      <p className="font-bold text-white truncate">{profile?.displayName}</p>
-                      <p className="text-[11px] text-slate-400 truncate">{firebaseUser.email}</p>
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl py-2 z-50 text-slate-800 dark:text-slate-200 text-xs font-medium animate-fadeIn">
+                    <div className="px-4 py-2 border-b border-slate-100 dark:border-slate-800">
+                      <p className="font-bold text-slate-900 dark:text-white truncate">
+                        {profile?.displayName}
+                      </p>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                        {firebaseUser.email}
+                      </p>
                     </div>
 
                     <Link
                       href={getPortalLink()}
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-slate-800 text-pink-300 font-bold transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2.5 hover:bg-pink-50 dark:hover:bg-slate-800 text-pink-600 dark:text-pink-300 font-bold transition-colors"
                     >
-                      <Sparkles className="w-4 h-4 text-pink-400" />
+                      <Sparkles className="w-4 h-4 text-pink-500" />
                       <span>{getPortalLabel()}</span>
                     </Link>
 
@@ -174,9 +231,9 @@ export function MainNavbar() {
                       <Link
                         href="/portal/admin"
                         onClick={() => setIsUserMenuOpen(false)}
-                        className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-800 text-slate-300 transition-colors"
+                        className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
                       >
-                        <Shield className="w-4 h-4 text-rose-400" />
+                        <Shield className="w-4 h-4 text-rose-500" />
                         <span>Panel de Administración</span>
                       </Link>
                     )}
@@ -184,20 +241,20 @@ export function MainNavbar() {
                     <Link
                       href="/portal/alumno"
                       onClick={() => setIsUserMenuOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-800 text-slate-300 transition-colors"
+                      className="flex items-center gap-2.5 px-4 py-2 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors"
                     >
-                      <User className="w-4 h-4 text-cyan-400" />
+                      <User className="w-4 h-4 text-indigo-500 dark:text-cyan-400" />
                       <span>Mis Clases y Simuladores</span>
                     </Link>
 
-                    <div className="my-1 border-t border-slate-800" />
+                    <div className="my-1 border-t border-slate-100 dark:border-slate-800" />
 
                     <button
                       onClick={async () => {
                         setIsUserMenuOpen(false);
                         await logout();
                       }}
-                      className="w-full flex items-center gap-2.5 px-4 py-2 text-rose-400 hover:bg-rose-950/30 text-left transition-colors font-semibold"
+                      className="w-full flex items-center gap-2.5 px-4 py-2 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 text-left transition-colors font-semibold"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>Cerrar Sesión</span>
@@ -210,8 +267,9 @@ export function MainNavbar() {
               <div className="flex items-center gap-2 sm:gap-3">
                 {/* Direct Google Sign-In Button */}
                 <button
+                  type="button"
                   onClick={() => signInWithGoogle()}
-                  className="px-3.5 py-2 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs shadow-md shadow-white/10 flex items-center gap-2 transition-all transform active:scale-95"
+                  className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-bold text-xs shadow-md border border-slate-200 dark:border-slate-700 flex items-center gap-2 transition-all transform active:scale-95"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path
@@ -237,8 +295,9 @@ export function MainNavbar() {
 
                 {/* Email / Full Login Modal Trigger */}
                 <button
+                  type="button"
                   onClick={() => setIsLoginModalOpen(true)}
-                  className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold text-xs shadow-md shadow-pink-500/25 flex items-center gap-1.5 transition-all"
+                  className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold text-xs shadow-md shadow-pink-500/25 flex items-center gap-1.5 transition-all transform active:scale-95"
                 >
                   <LogIn className="w-3.5 h-3.5" />
                   <span>Iniciar Sesión</span>
