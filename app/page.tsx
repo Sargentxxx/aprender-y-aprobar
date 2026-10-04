@@ -18,6 +18,7 @@ import {
   Award,
   ChevronRight,
   ChevronLeft,
+  ChevronDown,
   Flame,
   Lock,
   Search,
@@ -76,6 +77,7 @@ export default function HomePage() {
 
   // University 3D Flip Card state: tracks which cards are currently rotated
   const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+  const [hoveredUniId, setHoveredUniId] = useState<string | null>(null);
 
   const toggleFlip = (uniId: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -120,37 +122,84 @@ export default function HomePage() {
 
   return (
     <div className="w-full flex flex-col items-center overflow-x-hidden bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200">
-      {/* 1. HERO SECTION - Manychat-Inspired High-Converting Layout with Carousel & Floating Badges */}
-      <section className="relative w-full pt-10 pb-20 md:pt-16 md:pb-28 px-4 sm:px-6 lg:px-8 border-b border-slate-200 dark:border-pink-950/30 overflow-hidden flex flex-col justify-center items-center bg-gradient-to-b from-white via-pink-50/30 to-slate-50 dark:from-slate-950 dark:via-slate-900/60 dark:to-slate-950">
-        {/* Soft Ambient Background Glows */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-pink-500/15 via-purple-500/15 to-indigo-500/10 blur-[130px] rounded-full pointer-events-none -z-0" />
-        <div className="absolute top-1/2 -left-40 w-96 h-96 bg-pink-400/10 dark:bg-pink-600/10 blur-[120px] rounded-full pointer-events-none -z-0" />
-        <div className="absolute top-1/2 -right-40 w-96 h-96 bg-purple-400/10 dark:bg-purple-600/10 blur-[120px] rounded-full pointer-events-none -z-0" />
+      {/* 1. HERO SECTION - Full-Screen Hero Image Carousel with Overlaid Headline Cartel & Glassmorphic Details */}
+      <section className="relative w-full h-screen min-h-[680px] overflow-hidden flex flex-col justify-between items-center text-center select-none bg-slate-950">
+        {/* Full-Screen Carousel Slides */}
+        <div
+          className="absolute inset-0 w-full h-full"
+          onMouseEnter={() => setIsCarouselHovered(true)}
+          onMouseLeave={() => setIsCarouselHovered(false)}
+        >
+          {HERO_SLIDES.map((slide, idx) => {
+            const isActive = idx === currentSlide;
+            return (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                  isActive ? "opacity-100 z-0" : "opacity-0 -z-10 pointer-events-none"
+                }`}
+              >
+                <Image
+                  src={slide.image}
+                  alt={slide.alt}
+                  fill
+                  priority={idx === 0}
+                  className={`object-cover object-center transform transition-transform duration-10000 ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
+                  sizes="100vw"
+                />
+                {/* Lighter contrast overlay to ensure carousel images are vividly noticeable */}
+                <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-950/30 to-slate-950/60" />
+              </div>
+            );
+          })}
+        </div>
 
-        <div className="max-w-6xl mx-auto text-center relative z-10 space-y-8 w-full">
+        {/* Carousel Prev / Next Navigation Buttons (Fixed on screen edges) */}
+        <button
+          type="button"
+          onClick={prevSlide}
+          aria-label="Diapositiva anterior"
+          className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 p-3 sm:p-3.5 rounded-full bg-black/40 hover:bg-pink-600/80 text-white backdrop-blur-md border border-white/20 transition-all hover:scale-110 shadow-2xl"
+        >
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+
+        <button
+          type="button"
+          onClick={nextSlide}
+          aria-label="Siguiente diapositiva"
+          className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 p-3 sm:p-3.5 rounded-full bg-black/40 hover:bg-pink-600/80 text-white backdrop-blur-md border border-white/20 transition-all hover:scale-110 shadow-2xl"
+        >
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+
+        {/* Central Foreground Content: Overlaid Cartel with High Impact */}
+        <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-auto pt-28 pb-8 space-y-6 sm:space-y-7 w-full flex flex-col items-center justify-center">
           {/* Top Pill Badge: Manychat style with live glowing indicator */}
-          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white dark:bg-slate-900/90 border border-pink-200 dark:border-pink-500/40 text-pink-600 dark:text-pink-300 text-xs sm:text-sm font-extrabold shadow-lg shadow-pink-500/10 backdrop-blur-md transition-all hover:scale-105">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900/80 border border-pink-400/40 text-pink-300 text-xs sm:text-sm font-extrabold shadow-2xl shadow-pink-500/20 backdrop-blur-md transition-all hover:scale-105">
             <span className="flex h-2.5 w-2.5 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-pink-500"></span>
             </span>
             <span>🔥 +2.500 Estudiantes Aprobados en Argentina 🇦🇷</span>
-            <span className="hidden sm:inline-block text-slate-300 dark:text-slate-600">•</span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-amber-500 font-black">
+            <span className="text-slate-400">•</span>
+            <span className="inline-flex items-center gap-1 text-amber-400 font-black">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> 4.9/5
             </span>
           </div>
 
-          {/* Primary Headline with High-Impact Typography & Gradient Text */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.12] max-w-5xl mx-auto">
-            Rendí y Aprobá en tu Universidad{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-rose-500 to-purple-600 dark:from-pink-400 dark:via-rose-300 dark:to-purple-400">
+          {/* Primary Headline Cartel */}
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-[1.12] max-w-5xl mx-auto drop-shadow-2xl">
+            Aprende & Aproba en tu Universidad{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-300 to-purple-400">
               sin Complicarte.
             </span>
           </h1>
 
           {/* Subtitle with High Legibility */}
-          <p className="text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 max-w-3xl mx-auto leading-relaxed font-normal">
+          <p className="text-base sm:text-lg md:text-xl text-slate-100 max-w-3xl mx-auto leading-relaxed font-normal drop-shadow-md">
             La plataforma diseñada exclusivamente para estudiantes universitarios. Clases en video paso a paso, resúmenes oficiales de cátedra, flashcards con repetición espaciada y simuladores idénticos a los parciales de tu facultad.
           </p>
 
@@ -158,7 +207,7 @@ export default function HomePage() {
           <div className="flex flex-wrap items-center justify-center gap-3.5 pt-2">
             <a
               href="#universidades"
-              className="px-7 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black text-sm sm:text-base shadow-xl shadow-pink-500/25 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 active:translate-y-0"
+              className="px-7 py-4 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-black text-sm sm:text-base shadow-2xl shadow-pink-500/35 flex items-center gap-2.5 transition-all transform hover:-translate-y-1 active:translate-y-0"
             >
               <span>¿Cuál es tu Universidad?</span>
               <ArrowRight className="w-5 h-5" />
@@ -168,7 +217,7 @@ export default function HomePage() {
               <button
                 type="button"
                 onClick={() => signInWithGoogle()}
-                className="px-6 py-4 rounded-2xl bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-extrabold text-sm sm:text-base border border-slate-200 dark:border-slate-700 shadow-xl shadow-slate-200/50 dark:shadow-black/40 flex items-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0"
+                className="px-6 py-4 rounded-2xl bg-white/95 hover:bg-white text-slate-900 font-extrabold text-sm sm:text-base border border-white/60 shadow-2xl shadow-black/40 flex items-center gap-3 transition-all transform hover:-translate-y-1 active:translate-y-0"
               >
                 {/* Official Google G Logo */}
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -195,171 +244,158 @@ export default function HomePage() {
 
             <Link
               href="/materias/s21-economia-1"
-              className="px-6 py-4 rounded-2xl bg-pink-50 hover:bg-pink-100 dark:bg-slate-900/90 dark:hover:bg-slate-800 text-pink-700 dark:text-pink-300 font-bold text-sm sm:text-base border border-pink-200 dark:border-slate-700 shadow-lg flex items-center gap-2 transition-all"
+              className="px-6 py-4 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm sm:text-base border border-white/25 shadow-lg backdrop-blur-md flex items-center gap-2 transition-all transform hover:-translate-y-1"
             >
-              <Play className="w-4 h-4 text-pink-600 dark:text-pink-400 fill-pink-600 dark:fill-pink-400" />
+              <Play className="w-4 h-4 text-pink-400 fill-pink-400" />
               <span>Ver Clase Gratis (Economía I)</span>
             </Link>
           </div>
 
           {/* Social Proof Avatars & Rating */}
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-1 text-xs text-slate-500 dark:text-slate-400 font-semibold">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1 text-xs text-slate-200 font-semibold drop-shadow">
             <div className="flex -space-x-2">
-              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-white dark:border-slate-900 shadow">
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-slate-900 shadow">
                 SM
               </span>
-              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-white dark:border-slate-900 shadow">
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-slate-900 shadow">
                 LR
               </span>
-              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-white dark:border-slate-900 shadow">
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-slate-900 shadow">
                 TG
               </span>
-              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-emerald-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-white dark:border-slate-900 shadow">
+              <span className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-emerald-400 flex items-center justify-center text-white text-[10px] font-bold border-2 border-slate-900 shadow">
                 MP
               </span>
-              <span className="w-7 h-7 rounded-full bg-slate-800 text-pink-300 flex items-center justify-center text-[10px] font-extrabold border-2 border-white dark:border-slate-900 shadow">
+              <span className="w-7 h-7 rounded-full bg-slate-800 text-pink-300 flex items-center justify-center text-[10px] font-extrabold border-2 border-slate-900 shadow">
                 +2.5k
               </span>
             </div>
-            <div className="flex items-center gap-1 text-amber-500">
+            <div className="flex items-center gap-1 text-amber-400">
               {"★★★★★".split("").map((star, i) => (
                 <span key={i} className="text-sm">★</span>
               ))}
             </div>
             <span>Promedio 4.9/5 en satisfacción estudiantil</span>
           </div>
+        </div>
 
-          {/* 1.1 HERO INTERACTIVE CAROUSEL WITH 3 GENERATED IMAGES & FLOATING MANYCHAT BADGES */}
-          <div
-            className="pt-6 relative max-w-5xl mx-auto"
-            onMouseEnter={() => setIsCarouselHovered(true)}
-            onMouseLeave={() => setIsCarouselHovered(false)}
+        {/* Bottom Slide Indicators & Scroll Down Prompt */}
+        <div className="relative z-20 w-full max-w-6xl mx-auto px-4 pb-6 flex items-center justify-between">
+          <div className="w-24 hidden sm:block" />
+
+          {/* Scroll Down Prompt */}
+          <a
+            href="#destacados"
+            className="inline-flex flex-col items-center gap-1 text-white/80 hover:text-white transition-colors group cursor-pointer"
           >
-            {/* Outer Frame with Modern Glassmorphism & Subtle Glow */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/80 dark:border-slate-800/80 bg-slate-950 aspect-[16/9] sm:aspect-[21/10] md:aspect-[16/9] max-h-[540px] group">
-              {/* Carousel Slides */}
-              {HERO_SLIDES.map((slide, idx) => {
-                const isActive = idx === currentSlide;
-                return (
-                  <div
-                    key={slide.id}
-                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                      isActive ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
-                    }`}
-                  >
-                    <Image
-                      src={slide.image}
-                      alt={slide.alt}
-                      fill
-                      priority={idx === 0}
-                      className="object-cover object-center transform scale-100 group-hover:scale-105 transition-transform duration-1000"
-                    />
-                    {/* Balanced contrast overlays */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-slate-950/20" />
+            <span className="text-[10px] font-black uppercase tracking-widest text-pink-300 group-hover:text-pink-200">
+              Explorá la Plataforma
+            </span>
+            <span className="p-1.5 rounded-full bg-white/10 group-hover:bg-white/20 backdrop-blur-md border border-white/20 animate-bounce">
+              <ChevronDown className="w-4 h-4 text-white" />
+            </span>
+          </a>
 
-                    {/* Bottom Caption Pill within the slide */}
-                    <div className="absolute bottom-6 left-6 right-6 md:left-10 md:right-10 text-left z-20">
-                      <span className="inline-block px-3 py-1 rounded-full bg-pink-600/90 text-white font-extrabold text-[10px] sm:text-xs uppercase tracking-wider mb-2 shadow-lg">
-                        {slide.tag}
-                      </span>
-                      <h3 className="text-lg sm:text-2xl md:text-3xl font-black text-white drop-shadow-md">
-                        {slide.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-slate-200 mt-1 max-w-xl hidden sm:block font-medium drop-shadow">
-                        {slide.description}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {/* Prev / Next Navigation Buttons */}
+          {/* Dot Indicators */}
+          <div className="flex items-center gap-2 bg-black/30 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10">
+            {HERO_SLIDES.map((slide, i) => (
               <button
-                type="button"
-                onClick={prevSlide}
-                aria-label="Diapositiva anterior"
-                className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-110"
-              >
-                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
+                key={slide.id}
+                onClick={() => setCurrentSlide(i)}
+                aria-label={`Ir a diapositiva ${i + 1}`}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === currentSlide
+                    ? "w-7 bg-pink-500 shadow-md shadow-pink-500/50"
+                    : "w-2 bg-white/40 hover:bg-white/80"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <button
-                type="button"
-                onClick={nextSlide}
-                aria-label="Siguiente diapositiva"
-                className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 p-2 sm:p-3 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-110"
-              >
-                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
-
-              {/* Bottom Dot Indicators */}
-              <div className="absolute bottom-3 right-6 z-30 flex items-center gap-2">
-                {HERO_SLIDES.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setCurrentSlide(i)}
-                    aria-label={`Ir a diapositiva ${i + 1}`}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      i === currentSlide ? "w-7 bg-pink-500 shadow-md shadow-pink-500/50" : "w-2 bg-white/50 hover:bg-white/80"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Manychat-style Floating Interactive Badges */}
-            {/* 1. Top Right Floating Pill: Student Exam Passed */}
-            <div className="absolute -top-4 -right-2 sm:-right-4 md:-right-6 z-30 p-3 sm:p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-pink-200 dark:border-pink-500/40 shadow-2xl shadow-pink-500/20 text-left flex items-center gap-3 animate-float-gentle hidden sm:flex">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-sm shrink-0 shadow-md">
+      {/* 1.5 HIGHLIGHTED PILLARS & SUCCESS STORIES (Las 3 Tarjetas Reubicadas con Diseño Glass) */}
+      <section id="destacados" className="w-full py-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1: Exámenes Aprobados con 10 */}
+            <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 shadow-xl shadow-slate-200/40 dark:shadow-none transition-all flex items-start gap-4 group hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center text-white font-black text-lg shrink-0 shadow-lg shadow-emerald-500/25 group-hover:scale-105 transition-transform">
                 10
               </div>
-              <div>
+              <div className="space-y-1">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[11px] font-extrabold text-slate-900 dark:text-white">
+                  <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
                     ¡Aprobé con 10 en SIU Guaraní!
-                  </span>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  </h3>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
                 </div>
-                <p className="text-[10px] text-pink-600 dark:text-pink-300 font-semibold">
-                  Economía I • Siglo 21
+                <p className="text-xs font-bold text-pink-600 dark:text-pink-400">
+                  Economía I • Siglo 21, UNSE, UCSE
+                </p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-1">
+                  Modelos de parcial resueltos paso a paso e idénticos a los de tu cátedra para rendir con total tranquilidad.
                 </p>
               </div>
             </div>
 
-            {/* 2. Bottom Left Floating Pill: Active Recall */}
-            <div className="absolute -bottom-5 -left-2 sm:-left-4 md:-left-6 z-30 p-3 sm:p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-purple-200 dark:border-purple-500/40 shadow-2xl shadow-purple-500/20 text-left flex items-center gap-3 animate-float-delayed hidden sm:flex">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-md">
-                <Zap className="w-5 h-5 text-white" />
+            {/* Card 2: Active Recall & Repetición Espaciada */}
+            <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 shadow-xl shadow-slate-200/40 dark:shadow-none transition-all flex items-start gap-4 group hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-500 via-rose-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-purple-500/25 group-hover:scale-105 transition-transform">
+                <Zap className="w-6 h-6 text-white" />
               </div>
-              <div>
-                <span className="text-[11px] font-extrabold text-slate-900 dark:text-white block">
+              <div className="space-y-1">
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
                   Active Recall & Repetición Espaciada
-                </span>
-                <span className="text-[10px] text-purple-600 dark:text-purple-300 font-semibold">
+                </h3>
+                <p className="text-xs font-bold text-purple-600 dark:text-purple-400">
                   98% de retención en el examen parcial
-                </span>
+                </p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-1">
+                  Metodología comprobada de neurociencia: entrenás tu memoria respondiendo preguntas antes de ver la solución.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: Colaboración & Cátedra Oficial */}
+            <div className="p-6 rounded-3xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 shadow-xl shadow-slate-200/40 dark:shadow-none transition-all flex items-start gap-4 group hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-indigo-500/25 group-hover:scale-105 transition-transform">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+                  Colaboración & Cátedra Oficial
+                </h3>
+                <p className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
+                  Material exacto de tu facultad
+                </p>
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed pt-1">
+                  Clases grabadas en pizarra digital, resúmenes oficiales de cátedra y simuladores con preguntas de final.
+                </p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Quick Stats Grid with Frosted Glass for Light and Dark Modes */}
-          <div className="pt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-pink-600 dark:text-pink-400">98%</div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Tasa de Aprobación</div>
-            </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400">6</div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Universidades Oficiales</div>
-            </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400">+1.200h</div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Clases Grabadas HD</div>
-            </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">100%</div>
-              <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Pago Seguro MercadoPago</div>
-            </div>
+      {/* QUICK STATS SECTION (Sleek Glass Grid) */}
+      <section className="w-full py-10 px-4 sm:px-6 lg:px-8 bg-slate-100 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800">
+        <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all text-center">
+            <div className="text-2xl sm:text-3xl font-black text-pink-600 dark:text-pink-400">98%</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Tasa de Aprobación</div>
+          </div>
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all text-center">
+            <div className="text-2xl sm:text-3xl font-black text-purple-600 dark:text-purple-400">6</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Universidades Oficiales</div>
+          </div>
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all text-center">
+            <div className="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400">+1.200h</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Clases Grabadas HD</div>
+          </div>
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-md hover:shadow-lg transition-all text-center">
+            <div className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">100%</div>
+            <div className="text-xs text-slate-600 dark:text-slate-300 font-semibold mt-1">Pago Seguro MercadoPago</div>
           </div>
         </div>
       </section>
@@ -384,26 +420,28 @@ export default function HomePage() {
               ¿Cuál es tu Universidad?
             </h2>
             <p className="text-pink-100 text-sm sm:text-base max-w-xl mx-auto font-medium">
-              Hacé click o tocá cada tarjeta para <strong>girarla en 3D</strong> y descubrir las carreras y materias disponibles.
+              Pasá el mouse por encima de cada tarjeta para <strong>girarla automáticamente</strong> y descubrir las carreras y materias disponibles.
             </p>
           </div>
 
           {/* 6 3D FLIP CARDS GRID (2 cols x 3 rows on md+) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {MOCK_UNIVERSITIES.map((uni) => {
-              const isFlipped = !!flippedCards[uni.id];
+              const isFlipped = hoveredUniId === uni.id || !!flippedCards[uni.id];
               const isSelected = selectedUniversityId === uni.id;
               const uniSubjects = MOCK_SUBJECTS.filter((s) => s.universityId === uni.id);
 
               return (
                 <div
                   key={uni.id}
-                  className="perspective-1000 h-[380px] w-full cursor-pointer select-none"
+                  className="flip-card perspective-1000 h-[380px] w-full cursor-pointer select-none group"
+                  onMouseEnter={() => setHoveredUniId(uni.id)}
+                  onMouseLeave={() => setHoveredUniId(null)}
                   onClick={() => toggleFlip(uni.id)}
                 >
                   {/* Rotating Card Inner Container */}
                   <div
-                    className={`relative w-full h-full duration-700 transform-style-3d transition-transform ${
+                    className={`flip-card-inner relative w-full h-full duration-700 transform-style-3d transition-transform ${
                       isFlipped ? "rotate-y-180" : ""
                     }`}
                   >
@@ -461,10 +499,10 @@ export default function HomePage() {
                       {/* Bottom Front CTA prompt */}
                       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                         <span className="text-xs font-extrabold text-pink-600 dark:text-pink-400 flex items-center gap-1.5">
-                          <RotateCcw className="w-3.5 h-3.5 animate-spin-slow" />
-                          <span>Tocá para ver carreras y materias</span>
+                          <RotateCcw className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform duration-500" />
+                          <span>Pasá el mouse para ver carreras y materias</span>
                         </span>
-                        <span className="text-slate-400 text-sm font-black">↻</span>
+                        <span className="text-slate-400 text-sm font-black group-hover:rotate-180 transition-transform duration-500">↻</span>
                       </div>
                     </div>
 

@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth-context";
 import { useTheme } from "@/lib/theme-context";
 import { LoginModal } from "@/components/auth/LoginModal";
@@ -21,9 +22,10 @@ import {
 interface LogoProps {
   showPlatformTitle?: boolean;
   size?: "sm" | "md" | "lg";
+  forceWhiteText?: boolean;
 }
 
-export function AprenderAprobarLogo({ size = "md" }: LogoProps) {
+export function AprenderAprobarLogo({ size = "md", forceWhiteText = false }: LogoProps) {
   const isSm = size === "sm";
   const isLg = size === "lg";
 
@@ -63,7 +65,9 @@ export function AprenderAprobarLogo({ size = "md" }: LogoProps) {
       <div className="flex flex-col justify-center leading-tight">
         <div className="flex items-center gap-1.5">
           <span
-            className={`font-black tracking-tight text-slate-900 dark:text-white transition-colors duration-300 logo-shimmer-text ${
+            className={`font-black tracking-tight transition-colors duration-300 logo-shimmer-text ${
+              forceWhiteText ? "text-white" : "text-slate-900 dark:text-white"
+            } ${
               isSm ? "text-base" : isLg ? "text-3xl" : "text-xl sm:text-[22px]"
             }`}
             style={{ fontFamily: "var(--font-outfit, sans-serif)", letterSpacing: "-0.02em" }}
@@ -73,7 +77,9 @@ export function AprenderAprobarLogo({ size = "md" }: LogoProps) {
           <Sparkles className="w-3.5 h-3.5 text-pink-500 animate-bounce hidden sm:inline-block" />
         </div>
         <span
-          className={`font-extrabold uppercase tracking-wider text-pink-600 dark:text-pink-300/90 transition-colors ${
+          className={`font-extrabold uppercase tracking-wider transition-colors ${
+            forceWhiteText ? "text-pink-300" : "text-pink-600 dark:text-pink-300/90"
+          } ${
             isSm ? "text-[9px]" : isLg ? "text-[12px]" : "text-[10.5px]"
           }`}
         >
@@ -88,10 +94,25 @@ export function AprenderAprobarLogo({ size = "md" }: LogoProps) {
 export const AlphaSystemsLogo = AprenderAprobarLogo;
 
 export function MainNavbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
   const { firebaseUser, profile, logout, signInWithGoogle, isAdmin, isTeacher } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const isTransparent = isHome && !scrolled;
 
   const getPortalLink = () => {
     if (isAdmin) return "/portal/admin";
@@ -107,39 +128,59 @@ export function MainNavbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-pink-100 dark:border-pink-900/30 shadow-sm transition-colors duration-200">
+      <header
+        className={`w-full z-50 transition-all duration-300 ${
+          isHome
+            ? `fixed top-0 left-0 right-0 ${
+                isTransparent
+                  ? "backdrop-blur-md bg-slate-950/15 border-b border-white/10 shadow-lg shadow-black/5 text-white"
+                  : "backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-pink-100 dark:border-pink-900/30 shadow-md text-slate-900 dark:text-white"
+              }`
+            : "sticky top-0 backdrop-blur-xl bg-white/85 dark:bg-slate-950/85 border-b border-pink-100 dark:border-pink-900/30 shadow-sm text-slate-900 dark:text-white"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           {/* Logo with 10% size increase and eye-catching animated styling */}
           <Link href="/" className="hover:opacity-95 transition-opacity">
-            <AprenderAprobarLogo size="md" />
+            <AprenderAprobarLogo size="md" forceWhiteText={isTransparent} />
           </Link>
 
           {/* Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-bold text-slate-700 dark:text-slate-200">
+          <nav
+            className={`hidden lg:flex items-center gap-7 text-sm font-bold transition-colors ${
+              isTransparent ? "text-white/90" : "text-slate-700 dark:text-slate-200"
+            }`}
+          >
             <Link
               href="/#universidades"
-              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors flex items-center gap-1.5"
+              className="hover:text-pink-400 dark:hover:text-pink-400 transition-colors flex items-center gap-1.5"
             >
               <span>Universidades</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 font-extrabold border border-pink-200 dark:border-pink-500/30">
+              <span
+                className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold border ${
+                  isTransparent
+                    ? "bg-pink-500/25 text-pink-200 border-pink-400/40"
+                    : "bg-pink-100 dark:bg-pink-500/20 text-pink-700 dark:text-pink-300 border-pink-200 dark:border-pink-500/30"
+                }`}
+              >
                 6 Oficiales
               </span>
             </Link>
             <Link
               href="/#materias"
-              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+              className="hover:text-pink-400 dark:hover:text-pink-400 transition-colors"
             >
               Materias
             </Link>
             <Link
               href="/#metodo"
-              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+              className="hover:text-pink-400 dark:hover:text-pink-400 transition-colors"
             >
               Método de Estudio
             </Link>
             <Link
               href="/#portales"
-              className="hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
+              className="hover:text-pink-400 dark:hover:text-pink-400 transition-colors"
             >
               Portales
             </Link>
@@ -153,12 +194,16 @@ export function MainNavbar() {
               onClick={toggleTheme}
               title={theme === "dark" ? "Cambiar a modo Claro" : "Cambiar a modo Oscuro"}
               aria-label="Alternar tema de color"
-              className="p-2.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-amber-300 hover:border-pink-400 dark:hover:border-pink-500 transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center justify-center"
+              className={`p-2.5 rounded-2xl border transition-all shadow-sm hover:scale-105 active:scale-95 flex items-center justify-center ${
+                isTransparent
+                  ? "bg-white/10 hover:bg-white/20 border-white/20 text-amber-300 hover:border-pink-400"
+                  : "bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-amber-300 hover:border-pink-400 dark:hover:border-pink-500"
+              }`}
             >
               {theme === "dark" ? (
                 <Sun className="w-4 h-4 text-amber-300 animate-spin-slow" />
               ) : (
-                <Moon className="w-4 h-4 text-indigo-600" />
+                <Moon className={`w-4 h-4 ${isTransparent ? "text-amber-200" : "text-indigo-600"}`} />
               )}
             </button>
 
@@ -269,7 +314,11 @@ export function MainNavbar() {
                 <button
                   type="button"
                   onClick={() => signInWithGoogle()}
-                  className="px-3.5 py-2.5 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-bold text-xs shadow-md border border-slate-200 dark:border-slate-700 flex items-center gap-2 transition-all transform active:scale-95"
+                  className={`px-3.5 py-2.5 rounded-xl font-bold text-xs shadow-md border flex items-center gap-2 transition-all transform active:scale-95 ${
+                    isTransparent
+                      ? "bg-white/95 hover:bg-white text-slate-900 border-white/60 shadow-lg shadow-black/20"
+                      : "bg-white hover:bg-slate-50 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-800 dark:text-white border-slate-200 dark:border-slate-700"
+                  }`}
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24">
                     <path

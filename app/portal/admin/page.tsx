@@ -7,6 +7,7 @@ import { BlueprintCourses } from "@/components/admin/BlueprintCourses";
 import { ContentApproval } from "@/components/admin/ContentApproval";
 import { MercadoPagoManager } from "@/components/admin/MercadoPagoManager";
 import { DatabaseSeederButton } from "@/components/admin/DatabaseSeederButton";
+import { SocialSettingsManager } from "@/components/admin/SocialSettingsManager";
 import {
   Database,
   GitBranch,
@@ -16,11 +17,12 @@ import {
   Award,
   Crown,
   Building,
+  MessageSquareShare,
 } from "lucide-react";
 
 export default function AdminPortalPage() {
   const { profile } = useAuth();
-  const [activeTab, setActiveTab] = useState<"sis" | "blueprint" | "aprobacion" | "finanzas" | "seeder">("sis");
+  const [activeTab, setActiveTab] = useState<"sis" | "blueprint" | "aprobacion" | "finanzas" | "seeder" | "redes">("sis");
 
   const adminEmail = profile?.email || "alberto.ezequiel.garcia@gmail.com";
   const adminName = profile?.displayName || "Lic. Alberto Ezequiel García";
@@ -142,6 +144,7 @@ export default function AdminPortalPage() {
           { id: "aprobacion", label: "3. Aprobación de Materiales", icon: ShieldCheck },
           { id: "finanzas", label: "4. Facturación & MercadoPago", icon: CreditCard },
           { id: "seeder", label: "5. Sembrado Maestro Firestore", icon: RefreshCw },
+          { id: "redes", label: "6. WhatsApp & Redes Sociales", icon: MessageSquareShare },
         ].map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -185,6 +188,11 @@ export default function AdminPortalPage() {
       {/* TAB 5: FIRESTORE SEEDER */}
       {activeTab === "seeder" && (
         <DatabaseSeederButton />
+      )}
+
+      {/* TAB 6: WHATSAPP & REDES SOCIALES */}
+      {activeTab === "redes" && (
+        <SocialSettingsManager />
       )}
     </div>
   );

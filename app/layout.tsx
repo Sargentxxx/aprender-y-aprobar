@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import { ThemeProvider } from "@/lib/theme-context";
+import { SettingsProvider } from "@/lib/settings-context";
 import { MainNavbar } from "@/components/brand/Logo";
 import { Footer } from "@/components/brand/Footer";
+import { WhatsAppButton } from "@/components/shared/WhatsAppButton";
 
 export const metadata: Metadata = {
   title: "Aprender & Aprobar | Tu Plataforma Universitaria para Rendir y Aprobar",
@@ -34,9 +36,12 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-pink-500 selection:text-white transition-colors duration-200">
         <ThemeProvider>
           <AuthProvider>
-            <MainNavbar />
-            <main className="flex-1 w-full">{children}</main>
-            <Footer />
+            <SettingsProvider>
+              <MainNavbar />
+              <main className="flex-1 w-full">{children}</main>
+              <Footer />
+              <WhatsAppButton />
+            </SettingsProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>

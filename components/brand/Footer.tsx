@@ -5,27 +5,28 @@ import Link from "next/link";
 import { AprenderAprobarLogo } from "./Logo";
 import { CheckCircle2, ShieldCheck, Heart, Sparkles, MessageCircle, Mail } from "lucide-react";
 import { MOCK_UNIVERSITIES } from "@/lib/mock-data";
+import { SocialIcons } from "@/components/shared/SocialIcons";
+import { useSettings } from "@/lib/settings-context";
 
 export function Footer() {
+  const { getWhatsAppUrl, settings } = useSettings();
+  const whatsappUrl = getWhatsAppUrl();
+
   return (
     <footer className="w-full bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-pink-950/40 text-slate-600 dark:text-slate-400 text-xs py-14 mt-20 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Col 1: Aprender & Aprobar Brand */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="space-y-4">
             <AprenderAprobarLogo size="md" />
             <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md">
               La plataforma universitaria creada para que prepares tus materias con clases claras, resúmenes oficiales, modelos de examen resueltos y flashcards de repetición espaciada.
             </p>
-            <div className="flex flex-wrap items-center gap-4 text-xs">
-              <div className="flex items-center gap-2 text-pink-600 dark:text-pink-300 font-medium">
-                <Mail className="w-4 h-4 text-pink-500" />
-                <span>contacto@aprenderyaprobar.com</span>
-              </div>
-              <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                <MessageCircle className="w-4 h-4 text-emerald-500" />
-                <span>Comunidad WhatsApp de Alumnos</span>
-              </div>
+            <div className="pt-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-2">
+                Redes Oficiales
+              </span>
+              <SocialIcons size="sm" />
             </div>
           </div>
 
@@ -86,6 +87,35 @@ export function Footer() {
                 <CheckCircle2 className="w-3.5 h-3.5" /> Pago Seguro con MercadoPago
               </div>
               <div>Acceso inmediato las 24 hs</div>
+            </div>
+          </div>
+
+          {/* Col 4: Contacto & Atención Directa */}
+          <div>
+            <h4 className="text-slate-900 dark:text-white font-extrabold uppercase tracking-wider text-xs mb-3 flex items-center gap-1.5">
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
+              <span>Atención Directa</span>
+            </h4>
+            <p className="text-[11.5px] text-slate-500 dark:text-slate-400 mb-3">
+              ¿Tenés dudas con una cátedra o querés consultar sobre las clases?
+            </p>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-bold text-xs transition-colors mb-3 group"
+            >
+              <MessageCircle className="w-4 h-4 text-[#25D366] group-hover:scale-110 transition-transform" />
+              <span>{settings.whatsapp.phoneNumber || "Escribinos al WhatsApp"}</span>
+            </a>
+            <div className="space-y-1.5 text-[11px] text-slate-500">
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-pink-500" />
+                <span>contacto@aprenderyaprobar.com</span>
+              </div>
+              <div className="text-[10.5px] text-slate-400">
+                Atención online Lunes a Sábados
+              </div>
             </div>
           </div>
         </div>
