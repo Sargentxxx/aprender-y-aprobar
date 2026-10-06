@@ -57,19 +57,19 @@ export async function seedFirestoreDatabase(onProgress?: (msg: string) => void) 
   }
 
   // 8. Superadministrador y Estudiantes Ficticios
-  log("Garantizando Superadministrador alberto.ezequiel.garcia@gmail.com...");
+  log("Garantizando Superadministrador santillanosvaldomanuel@gmail.com...");
   await setDoc(
-    doc(db, "users", "admin-ezequiel"),
+    doc(db, "users", "admin-osvaldo"),
     {
-      uid: "admin-ezequiel",
-      email: "alberto.ezequiel.garcia@gmail.com",
-      displayName: "Lic. Alberto Ezequiel García (Director)",
+      uid: "admin-osvaldo",
+      email: "santillanosvaldomanuel@gmail.com",
+      displayName: "Osvaldo Manuel Santillán (Administrador General)",
       role: "admin",
       universityName: "Universidad Siglo 21",
       career: "Dirección Académica & Administración",
       studyStreak: 45,
       lastActiveDate: new Date().toISOString().split("T")[0],
-      badges: ["Director General", "Fundador", "Maestría en Economía", "Super Admin"],
+      badges: ["Director General", "Fundador", "Super Admin"],
       totalStudyMinutes: 2840,
       createdAt: "2026-01-01T00:00:00Z",
     },

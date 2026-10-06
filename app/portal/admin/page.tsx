@@ -8,6 +8,7 @@ import { ContentApproval } from "@/components/admin/ContentApproval";
 import { MercadoPagoManager } from "@/components/admin/MercadoPagoManager";
 import { DatabaseSeederButton } from "@/components/admin/DatabaseSeederButton";
 import { SocialSettingsManager } from "@/components/admin/SocialSettingsManager";
+import { PortalAuthGuard } from "@/components/auth/PortalAuthGuard";
 import {
   Database,
   GitBranch,
@@ -24,8 +25,8 @@ export default function AdminPortalPage() {
   const { profile } = useAuth();
   const [activeTab, setActiveTab] = useState<"sis" | "blueprint" | "aprobacion" | "finanzas" | "seeder" | "redes">("sis");
 
-  const adminEmail = profile?.email || "alberto.ezequiel.garcia@gmail.com";
-  const adminName = profile?.displayName || "Lic. Alberto Ezequiel García";
+  const adminEmail = profile?.email || process.env.NEXT_PUBLIC_ADMIN_EMAIL || "santillanosvaldomanuel@gmail.com";
+  const adminName = profile?.displayName || "Osvaldo Manuel Santillán";
 
   // Mock student list for SIS
   const mockStudents = [
@@ -97,7 +98,8 @@ export default function AdminPortalPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <PortalAuthGuard requiredRole="admin" portalName="Panel de Administración">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Super Admin Command Header */}
       <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-blue-950/40 to-slate-950 border border-slate-800 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
@@ -195,5 +197,6 @@ export default function AdminPortalPage() {
         <SocialSettingsManager />
       )}
     </div>
+    </PortalAuthGuard>
   );
 }

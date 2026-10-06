@@ -7,6 +7,7 @@ import { ActiveRecallCards } from "@/components/student/ActiveRecallCards";
 import { ExamSimulator } from "@/components/student/ExamSimulator";
 import { SecureVideoPlayer } from "@/components/student/SecureVideoPlayer";
 import { AcademicHistory } from "@/components/student/AcademicHistory";
+import { PortalAuthGuard } from "@/components/auth/PortalAuthGuard";
 import {
   MOCK_SUBJECTS,
   MOCK_FLASHCARDS,
@@ -39,14 +40,15 @@ export default function StudentPortalPage() {
 
   const studyLogs = generateStudyLogs();
 
-  const userEmail = profile?.email || firebaseUser?.email || "alberto.ezequiel.garcia@gmail.com";
-  const userName = profile?.displayName || "Alberto Ezequiel García";
+  const userEmail = profile?.email || firebaseUser?.email || "estudiante@aprenderyaprobar.com";
+  const userName = profile?.displayName || "Estudiante Universitario";
   const userId = profile?.uid || firebaseUser?.uid || "stu-alpha-9981";
   const studyStreak = profile?.studyStreak || 14;
   const badges = profile?.badges || ["Bienvenida", "Economía I Aprobada", "Racha 10 Días", "Top SpeedGrader"];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <PortalAuthGuard portalName="Portal del Estudiante">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Student Welcome Header Card */}
       <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-slate-950 border border-slate-800 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
@@ -249,5 +251,6 @@ export default function StudentPortalPage() {
         <AcademicHistory payments={MOCK_PAYMENTS} badges={badges} />
       )}
     </div>
+    </PortalAuthGuard>
   );
 }

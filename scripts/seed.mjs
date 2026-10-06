@@ -147,11 +147,11 @@ async function seed() {
 
     // Asegurar Super Admin
     await setDoc(
-      doc(db, "users", "admin-ezequiel"),
+      doc(db, "users", "admin-osvaldo"),
       {
-        uid: "admin-ezequiel",
-        email: "alberto.ezequiel.garcia@gmail.com",
-        displayName: "Lic. Alberto Ezequiel García (Director)",
+        uid: "admin-osvaldo",
+        email: "santillanosvaldomanuel@gmail.com",
+        displayName: "Osvaldo Manuel Santillán (Administrador General)",
         role: "admin",
         universityName: "Universidad Siglo 21",
         career: "Dirección Académica & Administración",
@@ -163,7 +163,7 @@ async function seed() {
       },
       { merge: true }
     );
-    console.log("✓ Super Administrador alberto.ezequiel.garcia@gmail.com verificado.");
+    console.log("✓ Super Administrador santillanosvaldomanuel@gmail.com verificado.");
 
     console.log("==> Sembrado completado con éxito.");
     process.exit(0);

@@ -13,7 +13,16 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 import { UserProfile, UserRole } from "@/lib/types";
 
-const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "alberto.ezequiel.garcia@gmail.com";
+const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "santillanosvaldomanuel@gmail.com";
+const ADMIN_EMAILS = [
+  ADMIN_EMAIL.toLowerCase().trim(),
+  "santillanosvaldomanuel@gmail.com",
+];
+
+export const isSuperAdminEmail = (email?: string | null): boolean => {
+  if (!email) return false;
+  return ADMIN_EMAILS.includes(email.toLowerCase().trim());
+};
 
 interface AuthContextType {
   firebaseUser: FirebaseUser | null;
@@ -59,7 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           const userRef = doc(db, "users", user.uid);
           const snap = await getDoc(userRef);
 
-          const isSuperAdmin = user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+          const isSuperAdmin = isSuperAdminEmail(user.email);
 
           if (snap.exists()) {
             const data = snap.data() as UserProfile;
@@ -91,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         } catch (err) {
           console.error("Error fetching user profile:", err);
           // Fallback in memory
-          const fallbackRole = user.email?.toLowerCase() === ADMIN_EMAIL.toLowerCase() ? "admin" : "student";
+          const fallbackRole = isSuperAdminEmail(user.email) ? "admin" : "student";
           setProfile({
             uid: user.uid,
             email: user.email || "",
@@ -141,7 +150,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setLoading(true);
     try {
       const res = await createUserWithEmailAndPassword(auth, email, pass);
-      const isSuperAdmin = email.toLowerCase() === ADMIN_EMAIL.toLowerCase();
+      const isSuperAdmin = isSuperAdminEmail(email);
       const roleToAssign = isSuperAdmin ? "admin" : preferredRole;
 
       const newProfile: UserProfile = {

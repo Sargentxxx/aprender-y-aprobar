@@ -5,6 +5,7 @@ import { useAuth } from "@/lib/auth-context";
 import { SpeedGrader } from "@/components/teacher/SpeedGrader";
 import { AttendanceTracker } from "@/components/teacher/AttendanceTracker";
 import { AIAssistant } from "@/components/teacher/AIAssistant";
+import { PortalAuthGuard } from "@/components/auth/PortalAuthGuard";
 import {
   MOCK_STUDENT_SUBMISSIONS,
   MOCK_ATTENDANCE,
@@ -23,7 +24,7 @@ import {
 } from "lucide-react";
 
 export default function TeacherPortalPage() {
-  const { profile } = useAuth();
+  const { profile, firebaseUser } = useAuth();
   const [activeTab, setActiveTab] = useState<"speedgrader" | "asistencia" | "ia" | "materias">("speedgrader");
 
   // New Lesson form state
@@ -32,8 +33,8 @@ export default function TeacherPortalPage() {
   const [newLessonVideo, setNewLessonVideo] = useState("");
   const [lessonAddedSuccess, setLessonAddedSuccess] = useState(false);
 
-  const teacherName = profile?.displayName || "Lic. Alberto Ezequiel García";
-  const teacherEmail = profile?.email || "alberto.ezequiel.garcia@gmail.com";
+  const teacherName = profile?.displayName || firebaseUser?.displayName || "Profesor Titular";
+  const teacherEmail = profile?.email || firebaseUser?.email || "docente@aprenderyaprobar.com";
 
   const handleAddLesson = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +47,8 @@ export default function TeacherPortalPage() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+    <PortalAuthGuard portalName="Portal del Docente">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
       {/* Teacher Profile Header Card */}
       <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-950 border border-slate-800 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
@@ -197,5 +199,6 @@ export default function TeacherPortalPage() {
         </div>
       )}
     </div>
+    </PortalAuthGuard>
   );
 }
