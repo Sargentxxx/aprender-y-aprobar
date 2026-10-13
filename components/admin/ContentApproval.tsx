@@ -18,7 +18,7 @@ export function ContentApproval() {
     {
       id: "mat-1",
       subjectName: "Economía I - Siglo 21",
-      teacherName: "Lic. Alberto Ezequiel García",
+      teacherName: "Alberto Ezequiel García",
       title: "Clase 2.3: Casos Reales de Examen de Elasticidad Precio Cruzada",
       type: "video",
       submittedAt: "2026-10-01 19:40",
@@ -27,7 +27,7 @@ export function ContentApproval() {
     {
       id: "mat-2",
       subjectName: "Matemática Financiera - Siglo 21",
-      teacherName: "Lic. Alberto Ezequiel García",
+      teacherName: "Alberto Ezequiel García",
       title: "Resumen Módulo 2: Sistema Francés vs Alemán de Amortización.pdf",
       type: "pdf",
       submittedAt: "2026-10-01 16:15",

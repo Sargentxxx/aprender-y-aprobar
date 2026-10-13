@@ -110,7 +110,7 @@ export function PortalAuthGuard({
               Has iniciado sesión como <strong className="text-slate-900 dark:text-white font-mono">{firebaseUser.email}</strong>, pero esta cuenta no tiene permisos de Super Administrador.
             </p>
             <p className="text-[11px] text-slate-500">
-              El panel de administración está reservado para el correo oficial designado (<strong className="font-mono text-cyan-500">santillanosvaldomanuel@gmail.com</strong>).
+              El panel de administración está reservado para los Super Administradores oficiales designados (Dirección General & Rectoría).
             </p>
           </div>
 

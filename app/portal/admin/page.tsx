@@ -25,8 +25,11 @@ export default function AdminPortalPage() {
   const { profile } = useAuth();
   const [activeTab, setActiveTab] = useState<"sis" | "blueprint" | "aprobacion" | "finanzas" | "seeder" | "redes">("sis");
 
-  const adminEmail = profile?.email || process.env.NEXT_PUBLIC_ADMIN_EMAIL || "santillanosvaldomanuel@gmail.com";
-  const adminName = profile?.displayName || "Osvaldo Manuel Santillán";
+  const adminEmail = profile?.email || "santillanosvaldomanuel@gmail.com";
+  const defaultAdminName = adminEmail.toLowerCase().includes("garcia")
+    ? "Alberto Ezequiel García"
+    : "Osvaldo Manuel Santillán";
+  const adminName = profile?.displayName || defaultAdminName;
 
   // Mock student list for SIS
   const mockStudents = [

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Estratégico & Estudio de Factibilidad - Aprender & Aprobar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#fdf4ff',
+              100: '#fae8ff',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              neon: '#ec4899',
+              cyan: '#06b6d4',
+              gold: '#f59e0b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media print {
+      body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        color: #0f172a !important;
+        break-inside: avoid;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .text-slate-100, .text-slate-200, .text-slate-300, .text-white {
+        color: #0f172a !important;
+      }
+      .text-slate-400, .text-slate-500 {
+        color: #475569 !important;
+      }
+      .bg-slate-900, .bg-slate-950, .bg-[#0B0F19] {
+        background: #ffffff !important;
+      }
+      table {
+        color: #0f172a !important;
+        border-color: #cbd5e1 !important;
+      }
+      th {
+        background-color: #f1f5f9 !important;
+        color: #0f172a !important;
+      }
+      td {
+        border-color: #e2e8f0 !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#080C16] text-slate-200 font-sans antialiased selection:bg-fuchsia-500 selection:text-white">
+
+  <!-- Top Sticky Navigation Bar -->
+  <nav class="sticky top-0 z-50 bg-[#0B0F19]/90 backdrop-blur-md border-b border-slate-800/80 px-4 lg:px-8 py-3.5 no-print">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="images/logo-icon.png" alt="Aprender & Aprobar" class="h-9 w-9 rounded-lg object-contain shadow-lg shadow-fuchsia-500/20 border border-fuchsia-500/30">
+        <div>
+          <span class="text-lg font-extrabold tracking-tight text-white flex items-center gap-1.5">
+            Aprender <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-pink-400 to-indigo-400">&</span> Aprobar
+          </span>
+          <span class="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-fuchsia-950/80 text-fuchsia-300 border border-fuchsia-800/50">
+            Informe Confidencial 2026
+          </span>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-5 text-xs font-medium text-slate-400">
+        <a href="#diagnostico" class="hover:text-fuchsia-400 transition-colors">Diagnóstico</a>
+        <a href="#mercado" class="hover:text-fuchsia-400 transition-colors">Estudio de Mercado</a>
+        <a href="#arquitectura" class="hover:text-fuchsia-400 transition-colors">3 Portales</a>
+        <a href="#costos" class="hover:text-fuchsia-400 transition-colors">Costos de Escala</a>
+        <a href="#honorarios" class="hover:text-fuchsia-400 transition-colors">Honorarios</a>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://aprender-y-aprobar.vercel.app" target="_blank" rel="noopener noreferrer" 
+           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition shadow-sm">
+          <span>🌐</span> Ver Demo en Vivo
+        </a>
+        <button onclick="window.print()" 
+                class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold text-white bg-gradient-to-r from-fuchsia-600 to-indigo-600 hover:from-fuchsia-500 hover:to-indigo-500 shadow-md shadow-fuchsia-600/30 transition transform active:scale-95">
+          <span>🖨️</span> Imprimir / PDF
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Document Header Hero -->
+  <header class="relative border-b border-slate-800/80 bg-gradient-to-b from-[#10162A] via-[#0B0F19] to-[#080C16] overflow-hidden pt-12 pb-16">
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(168,85,247,0.18),rgba(255,255,255,0))] pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <div class="flex flex-wrap items-center gap-2.5 mb-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-red-950/80 text-red-300 border border-red-800/40">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span> DOCUMENTO CONFIDENCIAL
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800/80 text-slate-300 border border-slate-700/60">
+          Estudio de Factibilidad & Consultoría EdTech
+        </span>
+        <span class="px-3 py-1 rounded-full text-xs font-medium bg-emerald-950/80 text-emerald-300 border border-emerald-800/40">
+          Octubre 2026
+        </span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+        Plan Estratégico, Análisis de Mercado y Escalamiento Cloud
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-300 font-medium max-w-3xl leading-relaxed mb-8">
+        Hacia la transformación de <span class="text-fuchsia-400 font-semibold">Aprender & Aprobar</span> en la plataforma líder nacional de tutoría universitaria de alto rendimiento.
+      </p>
+
+      <!-- Metadata Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl backdrop-blur-sm">
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Cliente Titular</span>
+          <p class="text-sm font-bold text-white mt-0.5">Alberto Ezequiel García</p>
+          <span class="text-xs text-slate-400">Titular de Cátedra / Fundador</span>
+        </div>
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Ecosistema Técnico</span>
+          <p class="text-sm font-bold text-white mt-0.5">Next.js 15 + Firebase</p>
+          <span class="text-xs text-slate-400">Edge Network & Serverless</span>
+        </div>
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Estado del Software</span>
+          <p class="text-sm font-bold text-emerald-400 mt-0.5">Producción Verificada</p>
+          <span class="text-xs text-slate-400">aprender-y-aprobar.vercel.app</span>
+        </div>
+        <div>
+          <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Margen Post-Infra</span>
+          <p class="text-sm font-bold text-fuchsia-400 mt-0.5">> 99% Operativo</p>
+          <span class="text-xs text-slate-400">Escalamiento elástico</span>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <!-- KPI Highlight Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-lg relative overflow-hidden group hover:border-fuchsia-500/50 transition">
+        <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 to-pink-400 mb-1">+140.000</div>
+        <div class="text-sm font-bold text-white mb-2">Alumnos en Mercado Inmediato</div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Estudiantes a distancia y presenciales en Siglo 21, UNSE, UCSE, UBP, UNQ y UNSTA cursando Ciencias Económicas con exámenes de opción múltiple.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-lg relative overflow-hidden group hover:border-cyan-500/50 transition">
+        <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400 mb-1">$0.042 USD</div>
+        <div class="text-sm font-bold text-white mb-2">Costo Servidor / Alumno / Mes</div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          En un escenario de 25.000 a 100.000 alumnos, la infraestructura cloud consume menos del 0.3% del ticket de venta promedio.
+        </p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 shadow-lg relative overflow-hidden group hover:border-amber-500/50 transition">
+        <div class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 mb-1">3 Portales</div>
+        <div class="text-sm font-bold text-white mb-2">Separación de Roles Segura</div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Portales independientes para Alumno (estudio y simuladores), Docente (carga ágil y banco de preguntas) y Admin (BI, facturación y métricas).
+        </p>
+      </div>
+    </section>
+
+    <!-- 1. Resumen Ejecutivo -->
+    <section id="resumen" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">1</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Resumen Ejecutivo</h2>
+      </div>
+
+      <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+        El presente informe fundamenta la decisión técnica y comercial de migrar <strong class="text-white">Aprender & Aprobar</strong> desde su arquitectura inicial basada en WordPress hacia una plataforma a medida en <strong class="text-fuchsia-400">Next.js 15 y Firebase</strong>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
+          <h4 class="font-bold text-fuchsia-400 mb-2 flex items-center gap-2">🛡️ Blindaje Anti-Piratería</h4>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Protección de videos mediante tokens efímeros y marcas de agua dinámicas con el DNI del alumno para neutralizar la reventa de cuentas en grupos de WhatsApp o Telegram.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
+          <h4 class="font-bold text-cyan-400 mb-2 flex items-center gap-2">⚡ Estabilidad en Semanas de Examen</h4>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Despliegue serverless elástico que absorbe picos de tráfico del 800% previo a las fechas de parciales sin saturación ni caídas de servidor.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
+          <h4 class="font-bold text-emerald-400 mb-2 flex items-center gap-2">🧠 Metodología Activa (Active Recall)</h4>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Simulador de parcial cronometrado con las mismas condiciones, banco de preguntas y retroalimentación inmediata que el examen oficial de la universidad.
+          </p>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
+          <h4 class="font-bold text-amber-400 mb-2 flex items-center gap-2">📈 Unit Economics Imbatibles</h4>
+          <p class="text-slate-300 text-xs leading-relaxed">
+            Costo de infraestructura ultra-bajo que preserva más del 99% de la facturación bruta, permitiendo reinvertir agresivamente en publicidad y adquisición.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Diagnóstico WordPress vs. Nueva Arquitectura -->
+    <section id="diagnostico" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">2</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Diagnóstico del Negocio Actual: El "Techo de Cristal" de WordPress</h2>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed mb-6">
+        El sitio original en WordPress sirvió como excelente validador de mercado. Sin embargo, al analizar su comportamiento bajo estrés operativo y escalamiento, surgen limitantes que ponen en riesgo la sustentabilidad de la academia:
+      </p>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-800 mb-6">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-950/80 text-slate-300 border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 font-bold">Dimensión</th>
+              <th class="p-3.5 font-bold text-red-400">WordPress con Plugins</th>
+              <th class="p-3.5 font-bold text-emerald-400">Nueva Plataforma Dedicada</th>
+              <th class="p-3.5 font-bold">Impacto Comercial</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr class="hover:bg-slate-800/30">
+              <td class="p-3.5 font-semibold text-white">Seguridad & DRM</td>
+              <td class="p-3.5 text-red-300">Links embebidos vulnerables descargables por navegador.</td>
+              <td class="p-3.5 text-emerald-300">Reproductor seguro con DRM, tokens efímeros y marca de agua.</td>
+              <td class="p-3.5 text-xs text-slate-400">Elimina la piratería y la reventa en grupos paralelos.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/30">
+              <td class="p-3.5 font-semibold text-white">Capacidad de Picos</td>
+              <td class="p-3.5 text-red-300">Servidor cPanel compartido propenso a caídas en parciales.</td>
+              <td class="p-3.5 text-emerald-300">Serverless en Vercel Edge con auto-escalado instantáneo.</td>
+              <td class="p-3.5 text-xs text-slate-400">Cero caídas y cero reembolsos por fallas técnicas.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/30">
+              <td class="p-3.5 font-semibold text-white">Experiencia UX</td>
+              <td class="p-3.5 text-red-300">Recargas lentas, desorganización visual y fricción mobile.</td>
+              <td class="p-3.5 text-emerald-300">Carga instantánea (&lt;0.8s), modo oscuro y UX estudiantil.</td>
+              <td class="p-3.5 text-xs text-slate-400">Mayor tasa de completitud y recomendación boca a boca.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/30">
+              <td class="p-3.5 font-semibold text-white">Cobros & Altas</td>
+              <td class="p-3.5 text-red-300">Verificaciones manuales de comprobantes de transferencia.</td>
+              <td class="p-3.5 text-emerald-300">Acreditación instantánea con webhook de MercadoPago.</td>
+              <td class="p-3.5 text-xs text-slate-400">Acceso en 5 segundos sin intervención del docente.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/30">
+              <td class="p-3.5 font-semibold text-white">Inteligencia de Datos</td>
+              <td class="p-3.5 text-red-300">No hay métricas de rendimiento por unidad ni preguntas.</td>
+              <td class="p-3.5 text-emerald-300">Analíticas en tiempo real de racha, tiempo y aciertos.</td>
+              <td class="p-3.5 text-xs text-slate-400">Permite detectar temas difíciles y optimizar el curso.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Estudio de Mercado EdTech en Argentina -->
+    <section id="mercado" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">3</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Estudio de Mercado EdTech Universitario en Argentina (2026)</h2>
+      </div>
+
+      <div class="space-y-6 text-sm text-slate-300 leading-relaxed">
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">3.1. Dimensionamiento del Mercado (TAM / SAM / SOM)</h3>
+          <ul class="list-disc pl-5 space-y-2 text-xs sm:text-sm">
+            <li>
+              <strong class="text-white">TAM (Mercado Total):</strong> Más de <strong class="text-fuchsia-400">2.400.000 estudiantes</strong> universitarios en Argentina. De ellos, aproximadamente <strong class="text-white">650.000 cursan Ciencias Económicas</strong>, Administración, Marketing y Comercio Internacional.
+            </li>
+            <li>
+              <strong class="text-white">SAM (Mercado Disponible Inmediato):</strong> Aproximadamente <strong class="text-cyan-400">140.000 estudiantes</strong> en universidades con modalidad virtual o semipresencial y exámenes estandarizados tipo test:
+              <ul class="list-circle pl-6 mt-1 space-y-1 text-xs text-slate-400">
+                <li><strong>Universidad Siglo 21:</strong> +90.000 alumnos en educación virtual/distribuida en todo el país.</li>
+                <li><strong>UBP, UCSE, UNSTA:</strong> Suman más de 35.000 estudiantes.</li>
+                <li><strong>UNSE y UNQ (Virtual):</strong> Suman más de 20.000 alumnos en carreras a distancia.</li>
+              </ul>
+            </li>
+            <li>
+              <strong class="text-white">SOM (Objetivo Comercial 2026-2027):</strong> Captar el <strong class="text-emerald-400">3% al 6% de la matrícula</strong> en materias filtro:
+              <span class="text-slate-400">Meta Cuatrimestre 1: 1.500 a 3.000 alumnos | Meta Año 2: 8.000 a 15.000 alumnos.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold text-white mb-2">3.2. El Factor "Materia Filtro" y la Psicología del Alumno</h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Materias como <strong class="text-white">Economía I</strong> registran tasas de reprobación del <strong class="text-red-400 font-bold">42% al 58%</strong> en el primer intento. El alumno que trabaja no tiene 40 horas semanales para leer manuales de 800 páginas. Lo que busca con urgencia es un <span class="text-fuchsia-400 font-semibold">método pragmático de preparación focalizada</span> que resuelva los exámenes reales con el vocabulario exacto de su cátedra.
+          </p>
+        </div>
+
+        <!-- Benchmark Matrix -->
+        <div>
+          <h3 class="text-lg font-bold text-white mb-3">3.3. Benchmark Competitivo</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800">
+              <span class="text-xs font-bold uppercase text-slate-400">Academias Tradicionales</span>
+              <h4 class="font-bold text-white mt-1 mb-2">Presenciales / Fotocopias</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Horarios rígidos, material en papel desactualizado y costo elevado sin flexibilidad móvil. No escalan a nivel nacional.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800">
+              <span class="text-xs font-bold uppercase text-slate-400">Filadd / Masivos</span>
+              <h4 class="font-bold text-white mt-1 mb-2">Generalistas Sin Cátedra</h4>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Contenido grabado masivo y a menudo desactualizado. Mismo video para varias universidades; foros atendidos por pasantes.
+              </p>
+            </div>
+            <div class="p-4 rounded-xl bg-fuchsia-950/30 border border-fuchsia-500/40 relative">
+              <span class="text-xs font-bold uppercase text-fuchsia-400">Aprender & Aprobar</span>
+              <h4 class="font-bold text-white mt-1 mb-2">Especialización & Active Recall</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Alineación 100% con los programas oficiales de cada universidad. Simulacro idéntico con cronómetro, racha de estudio y soporte docente directo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Arquitectura de 3 Portales -->
+    <section id="arquitectura" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">4</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Arquitectura de los 3 Portales Dedicados</h2>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed mb-6">
+        La plataforma separa estrictamente la experiencia del estudiante, la operatoria académica del docente y el control de negocio de la dirección:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="p-5 rounded-xl bg-slate-950/80 border border-fuchsia-500/30">
+          <div class="text-fuchsia-400 font-bold text-sm mb-1">🎓 Portal Alumno</div>
+          <p class="text-xs text-slate-400 mb-3">Enfocado en la retención y el aprobado</p>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4">
+            <li>Dashboard de materias con barra de avance.</li>
+            <li>Racha de estudio (streak) estilo Duolingo.</li>
+            <li>Visualizador HD con notas personales.</li>
+            <li>Simulador de parcial cronometrado.</li>
+            <li>Certificados descargables con QR.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-950/80 border border-cyan-500/30">
+          <div class="text-cyan-400 font-bold text-sm mb-1">👨‍🏫 Portal Docente</div>
+          <p class="text-xs text-slate-400 mb-3">Gestión académica y pedagógica</p>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4">
+            <li>Carga dinámica de clases y apuntes.</li>
+            <li>Editor visual del banco de preguntas.</li>
+            <li>Mapa de calor de errores por unidad.</li>
+            <li>Identificación de alumnos en riesgo.</li>
+            <li>Respuestas directas a consultas.</li>
+          </ul>
+        </div>
+
+        <div class="p-5 rounded-xl bg-slate-950/80 border border-amber-500/30">
+          <div class="text-amber-400 font-bold text-sm mb-1">📊 Portal Admin</div>
+          <p class="text-xs text-slate-400 mb-3">Control comercial y facturación</p>
+          <ul class="text-xs text-slate-300 space-y-1.5 list-disc pl-4">
+            <li>Métricas de ventas en tiempo real (MRR).</li>
+            <li>Auditoría de sesiones y seguridad.</li>
+            <li>Generador de cupones y promociones.</li>
+            <li>Gestión de comisiones y altas masivas.</li>
+            <li>Configuración global de la plataforma.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Diagram Container -->
+      <div class="p-5 rounded-xl bg-slate-950 border border-slate-800 text-center">
+        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-4">Diagrama de Flujo del Ecosistema</span>
+        <div class="mermaid">
+flowchart TD
+    A["🌐 aprenderyaprobar.com (Next.js 15)"] --> B["Portal Alumno\n(Active Recall & Simulador)"]
+    A --> C["Portal Docente\n(Carga & Banco de Preguntas)"]
+    A --> D["Portal Admin\n(BI & Facturación)"]
+    
+    B <--> S[("Firebase Firestore + Auth + Cloud Storage")]
+    C <--> S
+    D <--> S
+    
+    S --> MP["MercadoPago Webhook (Cobros Instantáneos)"]
+    S --> CF["Streaming Seguro (Cloudflare Stream / Bunny)"]
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Análisis de Costos de Infraestructura en Escenarios de Crecimiento -->
+    <section id="costos" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">5</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Análisis de Costos de Infraestructura: ¿Qué Pasa si la Plataforma Crece Demasiado?</h2>
+      </div>
+
+      <div class="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/40 mb-6">
+        <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
+          <span>💡</span> Conclusión Clave de Unit Economics
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          En la arquitectura serverless moderna, los costos de infraestructura <strong>se reducen por usuario a medida que aumenta la escala</strong>. Aún en el escenario de hipercrecimiento de 100.000 alumnos, la infraestructura técnica consume <strong>menos del 0.3% de la facturación</strong>, dejando un <strong>margen operativo bruto superior al 99%</strong>.
+        </p>
+      </div>
+
+      <!-- Scenarios Table -->
+      <div class="overflow-x-auto rounded-xl border border-slate-800 mb-8">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-950/90 text-slate-300 border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 font-bold">Rubro de Infraestructura</th>
+              <th class="p-3.5 font-bold">Escenario A<br><span class="text-xs font-normal text-slate-400">2.500 Alumnos/mes</span></th>
+              <th class="p-3.5 font-bold">Escenario B<br><span class="text-xs font-normal text-slate-400">25.000 Alumnos/mes</span></th>
+              <th class="p-3.5 font-bold text-fuchsia-400">Escenario C (Hipercrecimiento)<br><span class="text-xs font-normal text-fuchsia-300">100.000 Alumnos/mes</span></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Facturación Estimada Bruta<br><span class="text-[11px] text-slate-400">(Ticket prom. ~$25.000 ARS / $22 USD)</span></td>
+              <td class="p-3.5 font-bold text-emerald-400">$55.000 USD<br><span class="text-[11px] text-slate-400">~$62M ARS</span></td>
+              <td class="p-3.5 font-bold text-emerald-400">$550.000 USD<br><span class="text-[11px] text-slate-400">~$620M ARS</span></td>
+              <td class="p-3.5 font-bold text-emerald-400">$2.200.000 USD<br><span class="text-[11px] text-slate-400">~$2.480M ARS</span></td>
+            </tr>
+            <tr>
+              <td class="p-3.5">Vercel (Hosting Serverless & Edge)</td>
+              <td class="p-3.5">$20 USD</td>
+              <td class="p-3.5">$110 USD</td>
+              <td class="p-3.5">$900 USD</td>
+            </tr>
+            <tr>
+              <td class="p-3.5">Firebase / Cloud Firestore (Base de Datos)</td>
+              <td class="p-3.5">$25 USD</td>
+              <td class="p-3.5">$160 USD</td>
+              <td class="p-3.5">$550 USD</td>
+            </tr>
+            <tr>
+              <td class="p-3.5">Video Streaming HD Seguro (Cloudflare/Bunny)</td>
+              <td class="p-3.5">$95 USD</td>
+              <td class="p-3.5">$700 USD</td>
+              <td class="p-3.5">$2.500 USD</td>
+            </tr>
+            <tr>
+              <td class="p-3.5">Emails Transaccionales (Resend)</td>
+              <td class="p-3.5">$20 USD</td>
+              <td class="p-3.5">$80 USD</td>
+              <td class="p-3.5">$250 USD</td>
+            </tr>
+            <tr class="bg-slate-950/70 font-bold">
+              <td class="p-3.5 text-white">Costo Total Mensual de Infraestructura</td>
+              <td class="p-3.5 text-fuchsia-400">$160 USD / mes</td>
+              <td class="p-3.5 text-fuchsia-400">$1.050 USD / mes</td>
+              <td class="p-3.5 text-fuchsia-400">$4.200 USD / mes</td>
+            </tr>
+            <tr class="bg-slate-950/90 font-bold">
+              <td class="p-3.5 text-white">Costo Técnico Directo por Alumno</td>
+              <td class="p-3.5 text-cyan-400">$0.064 USD / alumno</td>
+              <td class="p-3.5 text-cyan-400">$0.042 USD / alumno</td>
+              <td class="p-3.5 text-cyan-400">$0.042 USD / alumno</td>
+            </tr>
+            <tr class="bg-emerald-950/30 font-bold">
+              <td class="p-3.5 text-emerald-300">Margen Bruto Post-Infraestructura</td>
+              <td class="p-3.5 text-emerald-300">99.71%</td>
+              <td class="p-3.5 text-emerald-300">99.81%</td>
+              <td class="p-3.5 text-emerald-300">99.81%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pasarela Note -->
+      <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 leading-relaxed">
+        <strong class="text-slate-300">Nota sobre la Pasarela de Pago (Mercado Pago):</strong> Las comisiones transaccionales oscilan entre 4.99% y 5.99% + IVA según la acreditación inmediata. Este costo se descuenta de forma automatizada en cada venta y se compensa ampliamente con la eliminación de carritos abandonados y la activación automática sin personal humano.
+      </div>
+    </section>
+
+    <!-- 6. Propuesta Comercial & Honorarios Profesionales -->
+    <section id="honorarios" class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">6</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Propuesta Comercial & Honorarios Profesionales del Desarrollador</h2>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed mb-6">
+        Con el fin de ofrecer máxima flexibilidad y alinearse a la estrategia financiera de la academia, se presentan <strong class="text-white">tres esquemas de contratación</strong>:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Opción A -->
+        <div class="p-6 rounded-2xl bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-fuchsia-500 shadow-xl relative flex flex-col justify-between">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white font-bold text-[10px] uppercase tracking-wider shadow-md">
+            ⭐ Recomendada
+          </div>
+          <div>
+            <div class="text-xs font-bold uppercase text-fuchsia-400 mb-1">Opción A</div>
+            <h3 class="text-xl font-extrabold text-white mb-3">Modelo Híbrido</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Setup inicial equilibrado con abono mensual de soporte continuo y evolución de cátedras.
+            </p>
+            <div class="border-t border-slate-800 pt-4 mb-4">
+              <div class="text-xs text-slate-400">Implementación Inicial:</div>
+              <div class="text-2xl font-extrabold text-white">$1.450.000 <span class="text-xs font-normal text-slate-400">ARS</span></div>
+              <div class="text-xs text-fuchsia-400 font-semibold mb-3">~ USD 1.250 (en 2 cuotas)</div>
+
+              <div class="text-xs text-slate-400">Abono Mensual (Retainer):</div>
+              <div class="text-lg font-bold text-white">$185.000 <span class="text-xs font-normal text-slate-400">ARS / mes</span></div>
+              <div class="text-xs text-slate-400 font-medium">~ USD 160 / mes</div>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Los 3 Portales entregados 100% operativos.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Pasarela MercadoPago y webhooks.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Monitoreo y guardia 24/7 en semanas de exámenes.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Carga/actualización de hasta 2 materias/mes.</li>
+            </ul>
+          </div>
+          <div class="text-center">
+            <span class="inline-block text-[11px] text-fuchsia-300 bg-fuchsia-950/80 px-2.5 py-1 rounded border border-fuchsia-800/40 w-full">
+              Ideal para crecimiento sostenido
+            </span>
+          </div>
+        </div>
+
+        <!-- Opción B -->
+        <div class="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 shadow-lg flex flex-col justify-between hover:border-slate-700 transition">
+          <div>
+            <div class="text-xs font-bold uppercase text-slate-400 mb-1">Opción B</div>
+            <h3 class="text-xl font-extrabold text-white mb-3">Llave en Mano</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Venta de licencia y cesión de código fuente con autonomía total y garantía de 60 días.
+            </p>
+            <div class="border-t border-slate-800 pt-4 mb-4">
+              <div class="text-xs text-slate-400">Pago Único Definitivo:</div>
+              <div class="text-2xl font-extrabold text-white">$3.200.000 <span class="text-xs font-normal text-slate-400">ARS</span></div>
+              <div class="text-xs text-cyan-400 font-semibold mb-3">~ USD 2.800 (en 3 hitos)</div>
+
+              <div class="text-xs text-slate-400">Abono Mensual:</div>
+              <div class="text-lg font-bold text-slate-400">$0 <span class="text-xs font-normal">ARS / mes</span></div>
+              <div class="text-xs text-slate-500 font-medium">Autonomía total del cliente</div>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Transferencia de repositorio GitHub privado.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Transferencia de cuentas Firebase y Vercel.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> 60 días de garantía y soporte técnico.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Capacitación grabada de 3 horas para el equipo.</li>
+            </ul>
+          </div>
+          <div class="text-center">
+            <span class="inline-block text-[11px] text-slate-400 bg-slate-900 px-2.5 py-1 rounded border border-slate-800 w-full">
+              Ideal para capitalización de activos
+            </span>
+          </div>
+        </div>
+
+        <!-- Opción C -->
+        <div class="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 shadow-lg flex flex-col justify-between hover:border-slate-700 transition">
+          <div>
+            <div class="text-xs font-bold uppercase text-slate-400 mb-1">Opción C</div>
+            <h3 class="text-xl font-extrabold text-white mb-3">Revenue Share</h3>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4">
+              Alianza estratégica con mínimo desembolso inicial y comisión sobre ventas cobradas.
+            </p>
+            <div class="border-t border-slate-800 pt-4 mb-4">
+              <div class="text-xs text-slate-400">Fee de Activación:</div>
+              <div class="text-2xl font-extrabold text-white">$650.000 <span class="text-xs font-normal text-slate-400">ARS</span></div>
+              <div class="text-xs text-amber-400 font-semibold mb-3">~ USD 550 (pago único)</div>
+
+              <div class="text-xs text-slate-400">Participación en Ventas:</div>
+              <div class="text-lg font-bold text-amber-400">6% <span class="text-xs font-normal text-slate-300">ventas brutas</span></div>
+              <div class="text-xs text-slate-400 font-medium">Liquidación mensual sobre pasarela</div>
+            </div>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Mínima barrera de entrada de capital.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Co-desarrollo enfocado en maximizar conversión.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Soporte técnico continuo incluido sin cargo fijo.</li>
+              <li class="flex items-start gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Plazo contractual inicial: 12 meses.</li>
+            </ul>
+          </div>
+          <div class="text-center">
+            <span class="inline-block text-[11px] text-amber-300 bg-amber-950/60 px-2.5 py-1 rounded border border-amber-800/40 w-full">
+              Ideal para presupuesto inicial acotado
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 7. Matriz de Decisión para el Cliente -->
+    <section class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">7</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Matriz Comparativa de Decisión</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-800">
+        <table class="w-full text-left text-xs sm:text-sm">
+          <thead class="bg-slate-950 text-slate-300 border-b border-slate-800">
+            <tr>
+              <th class="p-3.5 font-bold">Criterio de Evaluación</th>
+              <th class="p-3.5 font-bold text-fuchsia-400">Opción A (Híbrido ⭐)</th>
+              <th class="p-3.5 font-bold text-cyan-400">Opción B (Llave en Mano)</th>
+              <th class="p-3.5 font-bold text-amber-400">Opción C (Revenue Share)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Desembolso Inicial</td>
+              <td class="p-3.5 text-fuchsia-300 font-bold">Moderado ($1.45M ARS)</td>
+              <td class="p-3.5 text-cyan-300">Alto ($3.2M ARS)</td>
+              <td class="p-3.5 text-amber-300 font-bold">Mínimo ($650k ARS)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Costo Fijo Mensual</td>
+              <td class="p-3.5 text-fuchsia-300">$185.000 ARS / mes</td>
+              <td class="p-3.5 text-cyan-300">$0 ARS</td>
+              <td class="p-3.5 text-amber-300">Variable (6% de ventas)</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Guardia en Exámenes</td>
+              <td class="p-3.5 text-emerald-400 font-bold">Garantizada 24/7 permanente</td>
+              <td class="p-3.5 text-slate-400">Solo durante garantía (60 días)</td>
+              <td class="p-3.5 text-emerald-400 font-bold">Garantizada permanente</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Actualización de Materias</td>
+              <td class="p-3.5 text-emerald-400">Incluida (hasta 2/mes)</td>
+              <td class="p-3.5 text-slate-400">A cotizar por horas</td>
+              <td class="p-3.5 text-emerald-400">Incluida continuo</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold text-white">Propiedad Intelectual</td>
+              <td class="p-3.5">Licencia de uso exclusivo</td>
+              <td class="p-3.5 font-bold text-cyan-300">Cesión 100% de código</td>
+              <td class="p-3.5">Licencia exclusiva compartida</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 8. Cronograma & Próximos Pasos -->
+    <section class="print-card p-8 rounded-2xl bg-slate-900/60 border border-slate-800/90 shadow-xl backdrop-blur-sm">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-8 h-8 rounded-lg bg-fuchsia-950/80 text-fuchsia-400 flex items-center justify-center font-bold text-sm border border-fuchsia-800/50">8</span>
+        <h2 class="text-2xl font-bold text-white tracking-tight">Cronograma de Puesta en Marcha y Próximos Pasos</h2>
+      </div>
+
+      <p class="text-slate-300 text-sm leading-relaxed mb-6">
+        Dado que la arquitectura base ya está desplegada y probada en producción (<a href="https://aprender-y-aprobar.vercel.app" class="text-fuchsia-400 underline">aprender-y-aprobar.vercel.app</a>), los plazos para el lanzamiento comercial son ágiles (entre <strong class="text-white">2 y 3 semanas</strong>):
+      </p>
+
+      <div class="space-y-4 mb-8">
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+          <span class="w-7 h-7 rounded-full bg-fuchsia-950 text-fuchsia-400 border border-fuchsia-700/50 flex items-center justify-center font-bold text-xs shrink-0">1</span>
+          <div>
+            <h4 class="font-bold text-white text-sm">Paso 1: Elección del Modelo Comercial</h4>
+            <p class="text-xs text-slate-400 mt-0.5">Definición entre la Opción A (Híbrida), B (Llave en Mano) o C (Revenue Share) y firma del acuerdo de servicios.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+          <span class="w-7 h-7 rounded-full bg-cyan-950 text-cyan-400 border border-cyan-700/50 flex items-center justify-center font-bold text-xs shrink-0">2</span>
+          <div>
+            <h4 class="font-bold text-white text-sm">Paso 2: Conexión de Cuentas Oficiales</h4>
+            <p class="text-xs text-slate-400 mt-0.5">Vinculación de las credenciales oficiales de MercadoPago (Access Token) y Firebase a nombre de Alberto García o la razón social titular.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+          <span class="w-7 h-7 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-700/50 flex items-center justify-center font-bold text-xs shrink-0">3</span>
+          <div>
+            <h4 class="font-bold text-white text-sm">Paso 3: Carga Final de Videos y Preguntas de Economía I</h4>
+            <p class="text-xs text-slate-400 mt-0.5">Migración de los módulos oficiales de Economía I (Siglo 21) y precarga del banco de preguntas del simulador cronometrado.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 rounded-xl bg-slate-950/80 border border-slate-800">
+          <span class="w-7 h-7 rounded-full bg-amber-950 text-amber-400 border border-amber-700/50 flex items-center justify-center font-bold text-xs shrink-0">4</span>
+          <div>
+            <h4 class="font-bold text-white text-sm">Paso 4: Apertura de Inscripciones y Campaña de Exámenes</h4>
+            <p class="text-xs text-slate-400 mt-0.5">Lanzamiento oficial en el dominio principal y habilitación de cobros para el próximo turno de parciales.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer -->
+      <div class="p-6 rounded-2xl bg-gradient-to-r from-fuchsia-950/60 via-slate-900 to-indigo-950/60 border border-fuchsia-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <div class="font-bold text-white text-base">¿Listo para presentarle este informe a tu cliente?</div>
+          <div class="text-xs text-slate-400 mt-0.5">Puedes imprimir este documento directamente o exportarlo en PDF limpio.</div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="window.print()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 hover:from-fuchsia-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-fuchsia-600/30 transition transform active:scale-95 no-print">
+            📄 Guardar como PDF
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Document Footer -->
+  <footer class="border-t border-slate-800/80 bg-[#060911] py-8 text-center text-xs text-slate-400 no-print">
+    <div class="max-w-5xl mx-auto px-4 space-y-2">
+      <p class="font-medium text-slate-300">
+        Plataforma Aprender & Aprobar © 2026 — Informe Estratégico de Consultoría y Arquitectura EdTech
+      </p>
+      <p class="text-[11px] text-slate-400">
+        Diseñado y desarrollado para el liderazgo educativo en preparación universitaria en Argentina.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#0B0F19',
+        primaryColor: '#8b5cf6',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#6366f1',
+        lineColor: '#ec4899',
+        secondaryColor: '#0ea5e9',
+        tertiaryColor: '#1e293b'
+      }
+    });
+  </script>
+</body>
+</html>

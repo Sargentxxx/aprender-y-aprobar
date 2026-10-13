@@ -1012,7 +1012,7 @@ export default function HomePage() {
 
               <div className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                  <span className="text-xs font-bold text-slate-900 dark:text-white">Cátedra: Lic. Alberto Ezequiel García</span>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white">Cátedra: Alberto Ezequiel García</span>
                   <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400">Estado: Activo</span>
                 </div>
                 <div className="p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs space-y-2 shadow-sm">

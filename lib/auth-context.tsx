@@ -13,15 +13,39 @@ import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db, googleProvider } from "@/lib/firebase";
 import { UserProfile, UserRole } from "@/lib/types";
 
-const ADMIN_EMAIL = process.env.NEXT_PUBLIC_ADMIN_EMAIL || "santillanosvaldomanuel@gmail.com";
-const ADMIN_EMAILS = [
-  ADMIN_EMAIL.toLowerCase().trim(),
+const DEFAULT_SUPERADMIN_EMAILS = [
   "santillanosvaldomanuel@gmail.com",
+  "alberto.ezequiel.garcia@gmail.com",
 ];
+
+const BLOCKED_ADMIN_EMAILS = [
+  "alberto_garcia82@hotmail.com",
+  "alberto_garica82@hotmail.com",
+];
+
+const parseAdminEmails = (): string[] => {
+  const envRaw = [
+    process.env.NEXT_PUBLIC_ADMIN_EMAIL,
+    process.env.NEXT_PUBLIC_ADMIN_EMAILS,
+  ]
+    .filter(Boolean)
+    .join(",");
+
+  const customList = envRaw
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter((e) => Boolean(e) && !BLOCKED_ADMIN_EMAILS.includes(e));
+
+  return Array.from(new Set([...DEFAULT_SUPERADMIN_EMAILS.map((e) => e.toLowerCase()), ...customList]));
+};
+
+export const ADMIN_EMAILS = parseAdminEmails();
 
 export const isSuperAdminEmail = (email?: string | null): boolean => {
   if (!email) return false;
-  return ADMIN_EMAILS.includes(email.toLowerCase().trim());
+  const normalized = email.toLowerCase().trim();
+  if (BLOCKED_ADMIN_EMAILS.includes(normalized)) return false;
+  return ADMIN_EMAILS.includes(normalized);
 };
 
 interface AuthContextType {

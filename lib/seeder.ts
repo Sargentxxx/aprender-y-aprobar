@@ -56,8 +56,8 @@ export async function seedFirestoreDatabase(onProgress?: (msg: string) => void) 
     await setDoc(doc(db, "payments", pay.id), pay);
   }
 
-  // 8. Superadministrador y Estudiantes Ficticios
-  log("Garantizando Superadministrador santillanosvaldomanuel@gmail.com...");
+  // 8. Superadministradores y Estudiantes Ficticios
+  log("Garantizando Superadministradores de la Plataforma...");
   await setDoc(
     doc(db, "users", "admin-osvaldo"),
     {
@@ -67,6 +67,24 @@ export async function seedFirestoreDatabase(onProgress?: (msg: string) => void) 
       role: "admin",
       universityName: "Universidad Siglo 21",
       career: "Dirección Académica & Administración",
+      studyStreak: 45,
+      lastActiveDate: new Date().toISOString().split("T")[0],
+      badges: ["Director General", "Fundador", "Super Admin"],
+      totalStudyMinutes: 2840,
+      createdAt: "2026-01-01T00:00:00Z",
+    },
+    { merge: true }
+  );
+
+  await setDoc(
+    doc(db, "users", "admin-alberto-gmail"),
+    {
+      uid: "admin-alberto-gmail",
+      email: "alberto.ezequiel.garcia@gmail.com",
+      displayName: "Alberto Ezequiel García (Administrador General)",
+      role: "admin",
+      universityName: "Universidad Siglo 21",
+      career: "Dirección General & Finanzas",
       studyStreak: 45,
       lastActiveDate: new Date().toISOString().split("T")[0],
       badges: ["Director General", "Fundador", "Super Admin"],

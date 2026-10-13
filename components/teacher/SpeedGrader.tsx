@@ -39,7 +39,7 @@ export function SpeedGrader({ submissions: initialSubmissions, onGradeSubmitted 
       feedback: feedbackInput || "Trabajo corregido satisfactoriamente.",
       status: "graded",
       gradedAt: new Date().toISOString(),
-      gradedBy: "Lic. Alberto Ezequiel García",
+      gradedBy: "Alberto Ezequiel García",
     };
     setSubmissions(updated);
     setIsSaved(true);

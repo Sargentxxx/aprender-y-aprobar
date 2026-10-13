@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, deleteDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyCIAfNflgbzjj6k7wGYM-dy0DhvGhoBlVE",
@@ -74,7 +74,7 @@ const subjects = [
     isBlueprint: true,
     propagatedCampuses: ["Universidad Siglo 21", "UNSE", "UBP", "UCSE"],
     teacherId: "teacher-ezequiel",
-    teacherName: "Lic. Alberto Ezequiel García",
+    teacherName: "Alberto Ezequiel García",
     teacherEmail: "alberto.ezequiel.garcia@gmail.com",
     flashcardsCount: 24,
     examSimulationsCount: 3,
@@ -124,7 +124,7 @@ const subjects = [
     status: "published",
     isBlueprint: false,
     teacherId: "teacher-ezequiel",
-    teacherName: "Lic. Alberto Ezequiel García",
+    teacherName: "Alberto Ezequiel García",
     teacherEmail: "alberto.ezequiel.garcia@gmail.com",
     flashcardsCount: 18,
     examSimulationsCount: 2,
@@ -145,7 +145,7 @@ async function seed() {
       console.log(`✓ Materia sembrada: ${s.name}`);
     }
 
-    // Asegurar Super Admin
+    // Asegurar Super Administradores (Osvaldo Santillán y Alberto García)
     await setDoc(
       doc(db, "users", "admin-osvaldo"),
       {
@@ -163,7 +163,32 @@ async function seed() {
       },
       { merge: true }
     );
-    console.log("✓ Super Administrador santillanosvaldomanuel@gmail.com verificado.");
+
+    await setDoc(
+      doc(db, "users", "admin-alberto-gmail"),
+      {
+        uid: "admin-alberto-gmail",
+        email: "alberto.ezequiel.garcia@gmail.com",
+        displayName: "Alberto Ezequiel García (Administrador General)",
+        role: "admin",
+        universityName: "Universidad Siglo 21",
+        career: "Dirección General & Finanzas",
+        studyStreak: 45,
+        lastActiveDate: new Date().toISOString().split("T")[0],
+        badges: ["Director General", "Fundador", "Super Admin"],
+        totalStudyMinutes: 2840,
+        createdAt: "2026-01-01T00:00:00Z",
+      },
+      { merge: true }
+    );
+
+    try {
+      await deleteDoc(doc(db, "users", "admin-alberto-hotmail"));
+    } catch (_) {
+      // Ignorar si no existe
+    }
+
+    console.log("✓ Super Administradores exclusivos (santillanosvaldomanuel@gmail.com & alberto.ezequiel.garcia@gmail.com) verificados.");
 
     console.log("==> Sembrado completado con éxito.");
     process.exit(0);
